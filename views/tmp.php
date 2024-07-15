@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    <!-- POLYYYYYYYYYYYYYY DEYYYYYY -->
+    
     <script src="../script/bootstrap.bundle.min.js"></script>
 
     <script src="../script/jquery-3.7.1.min.js"></script>
