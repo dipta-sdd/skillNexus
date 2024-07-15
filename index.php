@@ -37,9 +37,11 @@ switch ($requests[0]) {
         require __DIR__ . '/views/training.php';
         break;
     case 'programs' :
-    require __DIR__ . '/views/programs.php';
-    break;
-    
+        require __DIR__ . '/views/programs.php';
+        break;
+    case 'program' :
+        require __DIR__ . '/views/program.php';
+        break;
     case 'lecture_upload' :
             require __DIR__ . '/views/lecture_up.php';
             break;

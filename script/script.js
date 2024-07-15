@@ -7,6 +7,8 @@ let apiLink = thirdSlashPart;
 if (apiLink == "https://skill-nexus.sankarsan.xyz") {
   apiLink = "https://skill-nexus-api.sankarsan.xyz";
 }
+apiLink = "http://127.0.0.1:8000";
+
 function toObj(arr) {
   var obj = {};
   for (var i = 0; i < arr.length; i++) {
