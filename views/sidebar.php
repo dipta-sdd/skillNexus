@@ -121,6 +121,16 @@
                 ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Experience</a
               >
             </li>
+            <li class=" d-none u-Student">
+              <a href="/my_skills"
+                ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Skills</a
+              >
+            </li>
+            <li class=" d-none u-Student">
+              <a href="/program"
+                ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Program</a
+              >
+            </li>
             <li class=" d-none u-University">
               <a href="/programs"
                 ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Programs</a
