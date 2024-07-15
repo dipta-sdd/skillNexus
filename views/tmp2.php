@@ -21,7 +21,6 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../style/style.css" />
-    <link rel="stylesheet" href="../style/program.css" />
   </head>
   <body>
     <div aria-live="polite" aria-atomic="true" class="position-relative">
@@ -35,16 +34,16 @@
           <nav aria-label="breadcrumb" class="mybg-t breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item" aria-current="page">Programs & Courses</li>
+              <li class="breadcrumb-item" aria-current="page">My Skills</li>
             </ol>
           </nav>
 
           <div class="row my-color mybg my-row">
             <div class="d-flex">
-              <h2 class="flex-grow-1 mb-2 text-primary"><b>Programs & Courses</b></h2>
+              <h2 class="flex-grow-1 mb-2 text-primary"><b>page title</b></h2>
               <div class="mb-2">
                 <a href="/my_program" class="btn btn-outline-primary btn-add" data-bs-toggle="modal" data-bs-target="#addProgram">
-                  My Program and courses
+                  button title
                 </a>
               </div>
             </div>
@@ -52,7 +51,7 @@
             <div class="col-12">
               <div class="row details">
                 <div class="col ">
-                  <div class="row px-5 program-con">
+                  <div class="row px-5 details-con">
                     <center class="text-danger">No program or course found.</center>
                   </div>  
 
@@ -79,10 +78,9 @@
 
     <script src="../script/jquery-3.7.1.min.js"></script>
     <script src="../script/script.js"></script>
-    <script src="../script/program.js"></script>
     <script>
       $(document).ready(function () {
-        on_page_load(['Student']);
+        on_page_load([]);
       });
     </script>
   </body>

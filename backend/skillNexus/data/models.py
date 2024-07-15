@@ -32,17 +32,10 @@ class Subcategory(models.Model):
     name = models.CharField(max_length=255)
 
 
-class Skill(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    subcategories = models.ManyToManyField(Subcategory, blank=True)
-
-
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    skills_required = models.ManyToManyField(Skill)
+    # skills_required = models.ManyToManyField(Skill)
     status = models.CharField(max_length=20, choices=[(
         'open', 'Open'), ('closed', 'Closed'), ('in_progress', 'In Progress')])
     # participants = models.ManyToManyField(
@@ -59,23 +52,6 @@ class Review(models.Model):
     rating = models.PositiveIntegerField()
     description = models.TextField()
     date = models.DateField()
-
-
-class Program(models.Model):
-    university = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='programs')
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    duration = models.PositiveIntegerField()
-    cost = models.DecimalField(max_digits=10, decimal_places=2)
-
-
-class Course(models.Model):
-    program = models.ForeignKey(
-        Program, on_delete=models.CASCADE, related_name='courses')
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    start_date = models.DateField()
 
 
 class PersonalDetails(models.Model):
@@ -217,3 +193,7 @@ class CourseLecture(models.Model):
     lecture_description = models.CharField(max_length=1000, blank=False)
     material = models.FileField(upload_to='materials/', blank=True)
     video = models.FileField(upload_to='videos/', blank=True)
+
+
+class Skill(models.Model):
+    name = models.CharField(max_length=100, blank=False)

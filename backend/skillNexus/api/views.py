@@ -793,3 +793,16 @@ def getSingleCourseDetail(req):
         return Response(course.data, status=status.HTTP_200_OK)
     except:
         return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ api_view(['GET'])
+def getProgramStudent(req):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            f"select data_universityProgram.id,data_universityProgram.name, data_universityProgram.type , data_universityProgram.duration_year , data_universityProgram.duration_month , data_universityProgram.description , data_university.user_id, data_university.name , data_university.address from data_universityProgram , data_university where data_university.user_id = data_universityProgram.user_id")
+        edus = cursor.fetchall()
+        print(edus)
+        edus = [dict(zip(['id', 'name', 'type', 'duration_year', 'duration_month', 'description',
+                     'university_id', 'university_name', 'university_address'], edu)) for edu in edus]
+        print(edus)
+        return Response(edus, status=status.HTTP_200_OK)

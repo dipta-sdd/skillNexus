@@ -126,3 +126,9 @@ class CourseLectureSeriallizer (serializers.ModelSerializer):
     class Meta:
         model = CourseLecture
         fields = '__all__'
+
+
+class SkillSeriallizer (serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = '__all__'
