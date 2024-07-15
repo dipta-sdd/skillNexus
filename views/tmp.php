@@ -45,7 +45,7 @@
           <!-- main body-->
           <!-- main body-->
           <!-- main body-->
-          <div class="row text-light mybg my-row"></div>
+          <div class="row mybg my-row"></div>
           <!-- main body-->
           <!-- main body-->
           <!-- main body-->

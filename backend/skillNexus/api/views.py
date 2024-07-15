@@ -455,3 +455,152 @@ def getExperience(req):
         return Response(experiences.data, status=status.HTTP_200_OK)
     except:
         return Response({'msg': 'No Experience Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ swagger_auto_schema(
+    methods=['get'],
+    operation_summary="Get Employer Company",
+    security=[{"Bearer": []}]
+)
+@ api_view(['GET'])
+def getCompany(req):
+    user = getUser(req)
+    print('___________________________________________________________________________________________')
+    try:
+        obj = Company.objects.get(user=user['id'])
+        company = CompanySerializer(obj)
+        print(company.data)
+        return Response(company.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'message': 'No company details found.'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ swagger_auto_schema(
+    methods=['post'],
+    operation_summary="Add employer company ",
+    request_body=ExperienceSeriallizer,
+    security=[{"Bearer": []}]
+)
+@ api_view(['POST'])
+def addCompany(req):
+    user = getUser(req)
+    data = req.data.copy()
+    data['user'] = user['id']
+    try:
+        obj = Company.objects.get(user=user['id'])
+        company = CompanySerializer(obj, data=data, partial=True)
+    except:
+        company = CompanySerializer(data=data)
+    if company.is_valid():
+        company.save()
+        return Response(company.data, status=status.HTTP_201_CREATED)
+    return Response(company.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@ swagger_auto_schema(
+    methods=['get'],
+    operation_summary="Get University",
+    security=[{"Bearer": []}]
+)
+@ api_view(['GET'])
+def getUniversity(req):
+    user = getUser(req)
+    print('___________________________________________________________________________________________')
+    try:
+        obj = University.objects.get(user=user['id'])
+        university = UniversitySerializer(obj)
+        print(university.data)
+        return Response(university.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'message': 'No university details found.'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ swagger_auto_schema(
+    methods=['post'],
+    operation_summary="Add university ",
+    request_body=UniversitySerializer,
+    security=[{"Bearer": []}]
+)
+@ api_view(['POST'])
+def addUniversity(req):
+    user = getUser(req)
+    data = req.data.copy()
+    data['user'] = user['id']
+    try:
+        obj = University.objects.get(user=user['id'])
+        university = UniversitySerializer(obj, data=data, partial=True)
+    except:
+        university = UniversitySerializer(data=data)
+    if university.is_valid():
+        university.save()
+        return Response(university.data, status=status.HTTP_201_CREATED)
+    return Response(university.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@ swagger_auto_schema(
+    methods=['post'],
+    operation_summary="Add university program/course ",
+    request_body=UniversityProgramSerial,
+    security=[{"Bearer": []}]
+)
+@ api_view(['POST'])
+def addProgram(req):
+    user = getUser(req)
+    data = req.data.copy()
+    data['user'] = user['id']
+    if 'id' in data:
+        obj = UniversityProgram.objects.get(id=data['id'], user=user['id'])
+        program = UniversityProgramSerial(obj, data=data, partial=True)
+    else:
+        program = UniversityProgramSerial(data=data)
+    if program.is_valid():
+        program.save()
+        return Response(program.data, status=status.HTTP_201_CREATED)
+    return Response(program.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@ swagger_auto_schema(
+    methods=['get'],
+    operation_summary="Get programs ans courses",
+    security=[{"Bearer": []}]
+)
+@ api_view(['GET'])
+def getProgram(req):
+    user = getUser(req)
+    try:
+        if 'program_id' in req.query_params:
+            objs = UniversityProgram.objects.filter(
+                user=user['id'], id=req.query_params['program_id'])
+        else:
+            objs = UniversityProgram.objects.filter(user=user['id'])
+        print(objs)
+        program = UniversityProgramSerial(objs, many=True)
+        return Response(program.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'No program or course Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ swagger_auto_schema(
+    methods=['delete'],
+    operation_summary="Delete program or course",
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        required=['program_id'],
+        properties={
+            'program_id': openapi.Schema(type=openapi.TYPE_STRING),
+        }
+    ),
+    security=[{"Bearer": []}]
+)
+@ api_view(['DELETE'])
+def deelProgram(req):
+    user = getUser(req)
+    program_id = req.data['program_id']
+    try:
+        program = UniversityProgram.objects.get(id=program_id, user=user['id'])
+        program.delete()
+        return Response({"message": "Program has been deleted"}, status=status.HTTP_200_OK)
+    except UniversityProgram.DoesNotExist:
+        return Response({"error": "Program record not found or does not belong to the user"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

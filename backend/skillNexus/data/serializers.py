@@ -96,3 +96,21 @@ class ExperienceSeriallizer (serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = '__all__'
+
+
+class CompanySerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = '__all__'
+
+
+class UniversitySerializer (serializers.ModelSerializer):
+    class Meta:
+        model = University
+        fields = '__all__'
+
+
+class UniversityProgramSerial (serializers.ModelSerializer):
+    class Meta:
+        model = UniversityProgram
+        fields = '__all__'

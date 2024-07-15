@@ -121,6 +121,11 @@
                 ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Experience</a
               >
             </li>
+            <li class=" d-none u-University">
+              <a href="/programs"
+                ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Programs</a
+              >
+            </li>
             
             <li>
               <a href="#"><i class="fa-solid fa-headset"></i> &nbsp Support</a>

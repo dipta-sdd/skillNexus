@@ -16,10 +16,7 @@ $(document).ready(function () {
     return uuu;
   }
 
-  // if (!user) {
-  //   location.replace("/login");
-  // }
-  console.log(user);
+  // console.log(user);
 
   $(".profile-pic .fa-user").addClass("d-none");
   $(".profile-pic").append(
@@ -29,151 +26,270 @@ $(document).ready(function () {
   $(".username").text("(" + user.username + ")");
   $(".role").text(user.role);
   showProfileDetails(user);
-  // show personal details
-  $.ajax({
-    type: "POST",
-    url: apiLink + "/api/personal_details",
-    data: { id: user.id },
-    success: function (res) {
-      console.log(res);
-      $(".personal-details").html(`
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Father's Name</span>
-            <input type="text" name="father_name" value="${
-              res.father_name ? res.father_name : ""
-            }" class="form-control per-name" disabled="" />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Mother's Name</span>
-            <input type="text" name="mother_name" value="${
-              res.mother_name ? res.mother_name : ""
-            }" class="form-control per-name" disabled />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Gender</span>
-            <select  name="gender" class="form-control per-name" disabled >
-            <option></option>
-            <option value="Male" ${
-              res.gender == "Male" ? "selected" : ""
-            }>Male</option>
-            <option value="Female" ${
-              res.gender == "Female" ? "selected" : ""
-            }>Female</option>
-            <option value="Other" ${
-              res.gender == "Other" ? "selected" : ""
-            }>Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Date of Birth</span>
-            <input type="date" name="date_of_birth" value="${
-              res.date_of_birth ? res.date_of_birth : ""
-            }" class="form-control per-name" disabled />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Religion</span>
-            <input type="text" name="religion" value="${
-              res.religion ? res.religion : ""
-            }" class="form-control per-name" disabled />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Marital Status</span>
-            <select name="marital_status" class="form-control per-name" disabled >
-            <option></option>
-            <option value="Single" ${
-              res.marital_status == "Single" ? "selected" : ""
-            }>Single</option>
-            <option value="Married" ${
-              res.marital_status == "Married" ? "selected" : ""
-            }>Married</option>
-            </select>
-          </div>
-        </div>
-      `);
-    },
-    error: function (err) {
-      res = err.responseJSON;
-      $(".personal-details").html(`
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Father's Name</span>
-            <input type="text" name="father_name" value="${
-              res.father_name ? res.father_name : ""
-            }" class="form-control per-name" disabled="" />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Mother's Name</span>
-            <input type="text" name="mother_name" value="${
-              res.mother_name ? res.mother_name : ""
-            }" class="form-control per-name" disabled />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Gender</span>
-            <select  name="gender" class="form-control per-name" disabled >
-            <option></option>
-            <option value="Male" ${
-              res.gender == "Male" ? "selected" : ""
-            }>Male</option>
-            <option value="Female" ${
-              res.gender == "Female" ? "selected" : ""
-            }>Female</option>
-            <option value="Other" ${
-              res.gender == "Other" ? "selected" : ""
-            }>Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Date of Birth</span>
-            <input type="date" name="date_of_birth" value="${
-              res.date_of_birth ? res.date_of_birth : ""
-            }" class="form-control per-name" disabled />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Religion</span>
-            <input type="text" name="religion" value="${
-              res.religion ? res.religion : ""
-            }" class="form-control per-name" disabled />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Marital Status</span>
-            <select name="marital_status" class="form-control per-name" disabled >
-            <option></option>
-            <option value="Single" ${
-              res.marital_status == "Single" ? "selected" : ""
-            }>Single</option>
-            <option value="Married" ${
-              res.marital_status == "Married" ? "selected" : ""
-            }>Married</option>
-            </select>
-          </div>
-        </div>
-      `);
-    },
+
+  console.log(user);
+  if (user.role != "University") {
+    showPersonalDetails();
+  } else {
+    $("#personal").remove();
+  }
+  // manage employe details
+  if (user.role == "Employer") {
+    $.ajax({
+      type: "GET",
+      url: apiLink + "/api/employer/company/get",
+      headers: {
+        Authorization: "Bearer " + getCookie("token"),
+      },
+      success: function (company) {
+        console.log(company);
+        showDetails(".company", company);
+      },
+    });
+  } else {
+    $(".company").remove();
+  }
+
+  function showDetails(selector, company) {
+    $(`${selector} .details .form-control.per-name`).each(function () {
+      $(this).val(company[$(this).attr("name")]);
+      $(this).attr("disabled", "");
+    });
+  }
+
+  // edit company details
+  $(".company button.btn-edit").click(function (e) {
+    e.preventDefault();
+    $(this).addClass("d-none");
+    $(".company button.btn-save").removeClass("d-none");
+    $(".company .details .form-control.per-name").removeAttr("disabled");
+  });
+  $(".company button.btn-save").click(function (e) {
+    e.preventDefault();
+
+    data = collectDataClass("company");
+    if (!data.error) {
+      $.ajax({
+        type: "POST",
+        url: "api/employer/company/add",
+        data: data,
+        headers: {
+          Authorization: "Bearer " + getCookie("token"),
+        },
+        success: function (company) {
+          showToast("Update successfull.", "primary");
+          showDetails(".company", company);
+          $(".company button.btn-edit").removeClass("d-none");
+          $(".company button.btn-save").addClass("d-none");
+        },
+      });
+    }
   });
 
+  // manage university details
+  if (user.role == "University") {
+    $.ajax({
+      type: "GET",
+      url: apiLink + "/api/university/get",
+      headers: {
+        Authorization: "Bearer " + getCookie("token"),
+      },
+      success: function (res) {
+        showDetails(".university", res);
+      },
+    });
+  } else {
+    $(".university").remove();
+  }
+  // edit university details
+  $(".university button.btn-edit").click(function (e) {
+    e.preventDefault();
+    $(this).addClass("d-none");
+    $(".university button.btn-save").removeClass("d-none");
+    $(".university .details .form-control.per-name").removeAttr("disabled");
+  });
+  $(".university button.btn-save").click(function (e) {
+    e.preventDefault();
+
+    data = collectDataClass("university");
+    if (!data.error) {
+      $.ajax({
+        type: "POST",
+        url: "api/university/add",
+        data: data,
+        headers: {
+          Authorization: "Bearer " + getCookie("token"),
+        },
+        success: function (university) {
+          showToast("Update successfull.", "primary");
+          showDetails(".university", university);
+          $(".university button.btn-edit").removeClass("d-none");
+          $(".university button.btn-save").addClass("d-none");
+        },
+      });
+    }
+  });
+
+  function collectDataClass(cls) {
+    let data = {};
+    $(`.${cls} .form-control.per-name`).each(function () {
+      val = $(this).val();
+      data[$(this).attr("name")] = val;
+      if (val == "") {
+        $(this).addClass("is-invalid");
+        data["error"] = true;
+      } else $(this).removeClass("is-invalid");
+    });
+
+    return data;
+  }
+  // show personal details
+  function showPersonalDetails() {
+    $.ajax({
+      type: "POST",
+      url: apiLink + "/api/personal_details",
+      data: { id: user.id },
+      success: function (res) {
+        // console.log(res);
+        $(".personal-details").html(`
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Father's Name</span>
+            <input type="text" name="father_name" value="${
+              res.father_name ? res.father_name : ""
+            }" class="form-control per-name" disabled="" />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Mother's Name</span>
+            <input type="text" name="mother_name" value="${
+              res.mother_name ? res.mother_name : ""
+            }" class="form-control per-name" disabled />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Gender</span>
+            <select  name="gender" class="form-control per-name" disabled >
+            <option></option>
+            <option value="Male" ${
+              res.gender == "Male" ? "selected" : ""
+            }>Male</option>
+            <option value="Female" ${
+              res.gender == "Female" ? "selected" : ""
+            }>Female</option>
+            <option value="Other" ${
+              res.gender == "Other" ? "selected" : ""
+            }>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Date of Birth</span>
+            <input type="date" name="date_of_birth" value="${
+              res.date_of_birth ? res.date_of_birth : ""
+            }" class="form-control per-name" disabled />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Religion</span>
+            <input type="text" name="religion" value="${
+              res.religion ? res.religion : ""
+            }" class="form-control per-name" disabled />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Marital Status</span>
+            <select name="marital_status" class="form-control per-name" disabled >
+            <option></option>
+            <option value="Single" ${
+              res.marital_status == "Single" ? "selected" : ""
+            }>Single</option>
+            <option value="Married" ${
+              res.marital_status == "Married" ? "selected" : ""
+            }>Married</option>
+            </select>
+          </div>
+        </div>
+      `);
+      },
+      error: function (err) {
+        res = err.responseJSON;
+        $(".personal-details").html(`
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Father's Name</span>
+            <input type="text" name="father_name" value="${
+              res.father_name ? res.father_name : ""
+            }" class="form-control per-name" disabled="" />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Mother's Name</span>
+            <input type="text" name="mother_name" value="${
+              res.mother_name ? res.mother_name : ""
+            }" class="form-control per-name" disabled />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Gender</span>
+            <select  name="gender" class="form-control per-name" disabled >
+            <option></option>
+            <option value="Male" ${
+              res.gender == "Male" ? "selected" : ""
+            }>Male</option>
+            <option value="Female" ${
+              res.gender == "Female" ? "selected" : ""
+            }>Female</option>
+            <option value="Other" ${
+              res.gender == "Other" ? "selected" : ""
+            }>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Date of Birth</span>
+            <input type="date" name="date_of_birth" value="${
+              res.date_of_birth ? res.date_of_birth : ""
+            }" class="form-control per-name" disabled />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Religion</span>
+            <input type="text" name="religion" value="${
+              res.religion ? res.religion : ""
+            }" class="form-control per-name" disabled />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Marital Status</span>
+            <select name="marital_status" class="form-control per-name" disabled >
+            <option></option>
+            <option value="Single" ${
+              res.marital_status == "Single" ? "selected" : ""
+            }>Single</option>
+            <option value="Married" ${
+              res.marital_status == "Married" ? "selected" : ""
+            }>Married</option>
+            </select>
+          </div>
+        </div>
+      `);
+      },
+    });
+  }
+
   const btn_edit_per = document.getElementById("btn-edit-personal");
-  console.log(btn_edit_per);
+  // console.log(btn_edit_per);
 
   $(document).on("click", "#personal .btn-edit-p", function (e) {
     e.preventDefault();

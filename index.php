@@ -36,6 +36,9 @@ switch ($requests[0]) {
     case 'training' :
         require __DIR__ . '/views/training.php';
         break;
+    case 'programs' :
+    require __DIR__ . '/views/programs.php';
+    break;
     default:
             http_response_code(404);
         require __DIR__ . '/views/404.php';

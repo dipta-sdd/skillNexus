@@ -25,4 +25,12 @@ urlpatterns = [
     path('experience/add', views.addExperience),
     path('experience/del', views.delExperience),
     path('experience/get', views.getExperience),
+    path('employer/company/get', views.getCompany),
+    path('employer/company/add', views.addCompany),
+    path('university/get', views.getUniversity),
+    path('university/add', views.addUniversity),
+    path('university/program/add', views.addProgram),
+    path('university/program/get', views.getProgram),
+    path('university/program/del', views.deelProgram),
+
 ]

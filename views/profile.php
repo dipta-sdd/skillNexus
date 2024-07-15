@@ -199,6 +199,131 @@
               <div class="row personal-details"></div>
             </div>
           </div>
+          <!-- company details -->
+          <div class="row my-color mybg my-row company">
+            <div class="d-flex">
+              <b class="flex-grow-1">Company Details</b>
+              <div>
+                <button type="button" class="btn btn-outline-primary btn-edit">
+                  <i class="fa-solid fa-pen pe-1"> </i>Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-save d-none"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+            <div class="col-11"></div>
+            <div class="col-1"></div>
+            <hr class="profile-hr" />
+            <div class="col-12">
+              <div class="row details">
+                <div class="col-lg-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Company Name </span>
+                    <input type="text" name="name" value="" class="form-control per-name" disabled="">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Industry </span>
+                    <input type="text" name="industry" value="" class="form-control per-name" disabled="">
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Description </span>
+                    <textarea type="text" name="description" value="" class="form-control per-name" disabled=""></textarea>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Address </span>
+                    <input type="text" name="address" value="" class="form-control per-name" disabled="">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Website </span>
+                    <input type="text" name="url" value="" class="form-control per-name" disabled="">
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+          </div>
+          <!-- university details  -->
+          <div class="row my-color mybg my-row university">
+            <div class="d-flex">
+              <b class="flex-grow-1">University Details</b>
+              <div>
+                <button type="button" class="btn btn-outline-primary btn-edit">
+                  <i class="fa-solid fa-pen pe-1"> </i>Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-save d-none"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+            <div class="col-11"></div>
+            <div class="col-1"></div>
+            <hr class="profile-hr" />
+            <div class="col-12">
+              <div class="row details">
+                <div class="col-lg-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">University Name </span>
+                    <input type="text" name="name" value="" class="form-control per-name" disabled="">
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Description </span>
+                    <textarea type="text" name="description" value="" class="form-control per-name" disabled=""></textarea>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Address </span>
+                    <input type="text" name="address" value="" class="form-control per-name" disabled="">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Website </span>
+                    <input type="text" name="url" value="" class="form-control per-name" disabled="">
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+          </div>
+          <!--_________________________________________-->
+          <!--_________________________________________-->
+          <!--_________________________________________-->
+          <!--_________________________________________-->
+          <!-- skills -->
+          <!-- skills -->
+          <!-- skills -->
+          <!-- skills -->
+          <!-- skills -->
+          <!-- skills -->
+          <!-- skills -->
+          <!-- ________________________________________ -->
+          <!-- ________________________________________ -->
+          <!-- ________________________________________ -->
+          <!-- ________________________________________ -->
           <!-- main body-->
           <!-- main body-->
           <!-- main body-->
@@ -217,7 +342,7 @@
     <script src="../script/profile.js"></script>
     <script>
       $(document).ready(function () {
-        on_page_load(['Admin', 'Student']);
+        on_page_load(['Admin', 'Student','Educator','University','Freelancer','Employer']);
       });
     </script>
   </body>

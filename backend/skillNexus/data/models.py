@@ -163,3 +163,38 @@ class Experience(models.Model):
     duration_day = models.IntegerField(blank=False)
     start_date = models.DateField(blank=False)
     end_date = models.DateField(blank=False)
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.OneToOneField(
+        User, primary_key=True, on_delete=models.CASCADE)
+    industry = models.CharField(max_length=100, blank=False)
+    description = models.CharField(max_length=500, blank=False)
+    address = models.CharField(max_length=100)
+    url = models.CharField(max_length=100)
+
+
+class University(models.Model):
+    user = models.OneToOneField(
+        User, primary_key=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, blank=False)
+    address = models.CharField(max_length=200)
+    logo = models.ImageField(blank=True)
+    description = models.CharField(max_length=1000, blank=False)
+    url = models.URLField(blank=False)
+
+
+class UniversityProgram(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, blank=False)
+    type = models.CharField(max_length=50, blank=False, choices=[
+        ('Graduate', 'Graduate'),
+        ('Undergraduate', 'Undergraduate'),
+        ('Professional', 'Professional'),
+        ('Certificate', 'Certificate'),
+        ('Doctoral', 'Doctoral')
+    ])
+    duration_year = models.IntegerField(blank=False)
+    duration_month = models.IntegerField(blank=False)
+    description = models.CharField(max_length=200, blank=True)

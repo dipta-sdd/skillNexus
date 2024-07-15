@@ -86,7 +86,7 @@ function showexperience(experience) {
   console.log(experience);
   $(".experience-con").append(`
         <div class="row" id="experience${experience.id}">
-            <div class="col-xl-12 col-9 pb-3">
+            <div class="col-xl-12 col-8 pb-3">
             <span class="institute">
                 ${experience.organisation_name}
             </span>
@@ -95,7 +95,7 @@ function showexperience(experience) {
               <i> ${experience.designation} </i> , ${experience.department}
             </span>
             </div>
-            <div class="col-xl-2 col-3 pt-1 date-duration">
+            <div class="col-xl-2 col-4 pt-1 date-duration">
             
             <span class="location"> 
                 <svg class="Icon_icon__2UXCa" width="14" height="17" viewBox="0 0 14 17" xmlns="http://www.w3.org/2000/svg"><title>B8A81890-540B-4D41-A5D3-6F649851464A</title><path d="M6.991 8.658a1.892 1.892 0 0 1-1.89-1.89c0-1.041.849-1.89 1.89-1.89 1.042 0 1.89.849 1.89 1.89 0 1.042-.848 1.89-1.89 1.89m0-4.724a2.838 2.838 0 0 0-2.834 2.834 2.838 2.838 0 0 0 2.834 2.835 2.838 2.838 0 0 0 2.835-2.835A2.838 2.838 0 0 0 6.99 3.934m4.279 7.335L6.99 15.548l-4.278-4.279a6.057 6.057 0 0 1 0-8.555A6.028 6.028 0 0 1 6.991.944c1.55 0 3.1.59 4.279 1.77a6.057 6.057 0 0 1 0 8.555m.668-9.224a7.004 7.004 0 0 0-9.893 0c-2.727 2.728-2.727 7.166 0 9.893l4.613 4.612a.468.468 0 0 0 .667 0l4.613-4.612c2.726-2.727 2.726-7.165 0-9.893" fill="#B8B8B8" fill-rule="evenodd"></path></svg>
