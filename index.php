@@ -39,6 +39,32 @@ switch ($requests[0]) {
     case 'programs' :
     require __DIR__ . '/views/programs.php';
     break;
+    
+    case 'lecture_upload' :
+            require __DIR__ . '/views/lecture_up.php';
+            break;
+
+    case 'all_course_detail' :
+                require __DIR__ . '/views/all_course_detail.php';
+                break;
+    case 'course_detail' :
+                require __DIR__ . '/views/course_detail.php';
+                 break;
+    case 'edit_detail' :
+             require __DIR__ . '/views/edit_detail.php';
+            break;
+    case 'lec_detail' :
+        require __DIR__ . '/views/lec_detail.php';
+        break;
+    case 'training' :
+        require __DIR__ . '/views/training.php';
+        break;
+    case 'videoshow' :
+            require __DIR__ . '/views/videoshow.php';
+            break;
+    case 'allvideoshow' :
+            require __DIR__ . '/views/allvideoshow.php';
+            break;
     default:
             http_response_code(404);
         require __DIR__ . '/views/404.php';

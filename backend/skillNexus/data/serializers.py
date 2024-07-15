@@ -114,3 +114,15 @@ class UniversityProgramSerial (serializers.ModelSerializer):
     class Meta:
         model = UniversityProgram
         fields = '__all__'
+
+
+class CourseSeriallizer (serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = '__all__'
+
+
+class CourseLectureSeriallizer (serializers.ModelSerializer):
+    class Meta:
+        model = CourseLecture
+        fields = '__all__'

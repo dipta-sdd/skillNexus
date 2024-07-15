@@ -33,4 +33,14 @@ urlpatterns = [
     path('university/program/get', views.getProgram),
     path('university/program/del', views.deelProgram),
 
+    path('course/add', views.addCourse),
+    path('course_lecture/add', views.addCourseLecture),
+    path('course/get', views.getCourseDetail),
+    path('course_list_single/get', views.getSingleCourseDetail),
+    path('course_del/del', views.delCourse),
+    path('course_video/get', views.getCourseVideo),
+    path('course_video/edit', views.edit_course_video),
+    path('course/edit', views.editCourse),
+    path('course_list/get', views.courselist)
+
 ]

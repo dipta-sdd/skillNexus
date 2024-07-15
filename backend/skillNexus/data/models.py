@@ -198,3 +198,22 @@ class UniversityProgram(models.Model):
     duration_year = models.IntegerField(blank=False)
     duration_month = models.IntegerField(blank=False)
     description = models.CharField(max_length=200, blank=True)
+
+
+class Course(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
+    title = models.CharField(max_length=1000, blank=False)
+    course_outcome = models.CharField(max_length=1000, blank=False)
+    course_contain = models.CharField(max_length=1000, blank=False)
+    course_fee = models.DecimalField(
+        decimal_places=2, max_digits=5, blank=False)
+    course_thumbnil = models.ImageField(upload_to="thumbnil/", blank=False)
+
+
+class CourseLecture(models.Model):
+    user = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
+    title = models.CharField(max_length=1000, blank=False)
+    lecture_description = models.CharField(max_length=1000, blank=False)
+    material = models.FileField(upload_to='materials/', blank=True)
+    video = models.FileField(upload_to='videos/', blank=True)

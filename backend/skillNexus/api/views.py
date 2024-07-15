@@ -604,3 +604,192 @@ def deelProgram(req):
         return Response({"error": "Program record not found or does not belong to the user"}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@ api_view(['POST'])
+def addCourse(req):
+    print('_____________________add training_______________________')
+    user = getUser(req)
+    data = req.data.copy()
+    data['user'] = user['id']
+    # if 'id' in data:
+    #     obj = Experience.objects.get(id=data['id'], user=user['id'])
+    #     serializer = ExperienceSeriallizer(obj, data=data, partial=True)
+    # else:
+
+    serializer = CourseSeriallizer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@ api_view(['GET'])
+def getCourseDetail(req):
+    user = getUser(req)
+    try:
+        if 'course_id' in req.query_params:
+            objs = Course.objects.filter(
+                user=user['id'], id=req.query_params['course_id'])
+        else:
+            objs = Course.objects.filter(user=user['id'])
+        print(objs)
+        course = CourseSeriallizer(objs, many=True)
+        return Response(course.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ api_view(['DELETE'])
+def delcourse(req):
+    user = getUser(req)
+
+    course_id = req.data['course_id']
+    try:
+        course = Course.objects.get(id=course_id, user=user['id'])
+        course.delete()
+        print(course)
+        return Response({"message": "Course has been deleted"}, status=status.HTTP_200_OK)
+    except Course.DoesNotExist:
+        return Response({"error": "Course record not found or does not belong to the user"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@ api_view(['POST'])
+def addCourseLecture(req):
+    print('_____________________add Lecture_______________________')
+    user = getUser(req)
+    print(user)
+    print(req.data)
+    data = req.data.dict()
+    data['user'] = user['id']
+
+    serializer = CourseLectureSeriallizer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delCourse(request):
+    user = request.user  # Assuming you're using Django Rest Framework's authentication
+    # Use request.data.get to safely retrieve data
+    course_id = request.data.get('course_id')
+
+    try:
+        course = Course.objects.get(id=course_id, user=user)
+        course.delete()
+        return Response({"message": "Course has been deleted"}, status=status.HTTP_204_NO_CONTENT)
+    except Course.DoesNotExist:
+        return Response({"error": "Course record not found or does not belong to the user"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['POST'])
+def editCourse(request):
+    print('___________________________')
+    user = request.user
+    course_id = request.data.get('course_id')
+    try:
+        course = Course.objects.get(id=course_id, user=user)
+        course.title = request.data.get('title', course.title)
+        course.course_outcome = request.data.get(
+            'course_outcome', course.course_outcome)
+        course.course_contain = request.data.get(
+            'course_contain', course.course_contain)
+
+        if 'course_thumbnil' in request.FILES:
+            course.course_thumbnil = request.FILES['course_thumbnil']
+
+        course.save()
+        return Response({"message": "Course has been updated"}, status=status.HTTP_200_OK)
+    except Course.DoesNotExist:
+        return Response({"error": "Course record not found or does not belong to the user"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@ api_view(['GET'])
+def getLectureDetail(req):
+    user = getUser(req)
+    try:
+        if 'course_id' in req.query_params:
+            objs = CourseLecture.objects.filter(
+                user=user['id'], id=req.query_params['course_id'])
+        else:
+            objs = CourseLecture.objects.filter(user=user['id'])
+        print(objs)
+        course = CourseLectureSeriallizer(objs, many=True)
+        return Response(course.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ api_view(['GET'])
+def getCourseVideo(req):
+    user = getUser(req)
+    try:
+        if 'course_id' in req.query_params:
+            objs = CourseLecture.objects.filter(
+                user=user['id'], id=req.query_params['course_id'])
+        else:
+            objs = CourseLecture.objects.filter(user=user['id'])
+        print(objs)
+        course = CourseLectureSeriallizer(objs, many=True)
+        return Response(course.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def edit_course_video(request):
+    try:
+        user = getUser(request)  # Assuming `getUser` retrieves user info
+        course_id = request.query_params.get('course_id')
+
+        if course_id:
+            objs = CourseLecture.objects.filter(user=user['id'], id=course_id)
+        else:
+            objs = CourseLecture.objects.filter(user=user['id'])
+
+        if objs.exists():
+            serializer = CourseLectureSeriallizer(objs, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
+
+    except Exception as e:
+        return Response({'msg': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@ api_view(['GET'])
+def courselist(req):
+    try:
+        if 'course_id' in req.query_params:
+            objs = Course.objects.filter(id=req.query_params['course_id'])
+        else:
+            objs = Course.objects.filter()
+        print(objs)
+        course = CourseSeriallizer(objs, many=True)
+        return Response(course.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ api_view(['GET'])
+def getSingleCourseDetail(req):
+
+    try:
+        if 'course_id' in req.query_params:
+            objs = Course.objects.filter(
+                id=req.query_params['course_id'])
+        else:
+            objs = Course.objects.filter()
+        print(objs)
+        course = CourseSeriallizer(objs, many=True)
+        return Response(course.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
