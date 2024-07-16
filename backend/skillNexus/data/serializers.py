@@ -134,7 +134,11 @@ class SkillSeriallizer (serializers.ModelSerializer):
         fields = '__all__'
 
 
-class EnrollmentSerializer(serializers.ModelSerializer):
+class EnrollmentSeriallizer (serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = '__all__'
+
+
+
+

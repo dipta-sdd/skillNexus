@@ -828,15 +828,94 @@ def getProgramStudent(req):
         return Response(edus, status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
-def enroll_course(request):
-    user = request.user
-    course_id = request.data.get('course_id')
+
+@api_view(['GET'])
+
+def get_course_list_single(request):
+    course_id = request.GET.get('course_id')
+    courses = Course.objects.filter(id=course_id)
+    response_data = []
     
+    for course in courses:
+        course_data = CourseSeriallizer(course).data
+        # Check if the user is already enrolled
+        is_enrolled = Enrollment.objects.filter(course=course, user=request.user).exists()
+        course_data['is_enrolled'] = is_enrolled
+        response_data.append(course_data)
+
+    return Response(response_data)
+
+
+
+
+# @api_view(['POST'])
+# def course_enroll(request):
+#     try:
+#          course_id = request.GET.get('course_id')
+#     except Course.DoesNotExist:
+#         return Response({'detail': 'Course not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+#     # Get the user (assuming you have a way to retrieve the user from the request)
+#     user = getUser(request)
+
+#     # Check if the user is already enrolled in the course
+#     if Enrollment.objects.filter(course=course_id, user=user).exists():
+#         return Response({'detail': 'Already enrolled in this course.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+#     # Enroll the user
+#     enrollment = Enrollment.objects.create(course=course_id, user=user)
+#     return Response({'detail': 'Successfully enrolled in the course.'}, status=status.HTTP_201_CREATED)
+
+
+
+# @api_view(['GET'])
+# def check_enrollment(request):
+#     course_id = request.GET.get('course_id')
+#     try:
+#         course = Course.objects.get(id=course_id)
+#     except Course.DoesNotExist:
+#         return Response({'enrolled': False}, status=status.HTTP_404_NOT_FOUND)
+
+#     user = getUser(request)
+
+#     # Check if the user is enrolled in the course
+#     is_enrolled = Enrollment.objects.filter(course=course, user=user).exists()
+
+#     return Response({'enrolled': is_enrolled})
+
+
+
+@api_view(['POST'])
+def course_enroll(request):
+    course_id = request.data.get('course_id')  # Use request.data to retrieve POST data
     try:
         course = Course.objects.get(id=course_id)
-        enrollment = Enrollment(user=user, course=course)
-        enrollment.save()
-        return Response({'message': 'Course enrolled successfully'}, status=status.HTTP_201_CREATED)
     except Course.DoesNotExist:
-        return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'detail': 'Course not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    user = request.user  # Assuming you have authentication middleware to get the user
+
+    # Check if the user is already enrolled in the course
+    if Enrollment.objects.filter(course=course, user=user).exists():
+        return Response({'detail': 'Already enrolled in this course.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Enroll the user
+    enrollment = Enrollment.objects.create(course=course, user=user)
+    return Response({'detail': 'Enrolled successfully.'}, status=status.HTTP_200_OK)
+
+
+
+@api_view(['GET'])
+def check_enrollment(request):
+    course_id = request.query_params.get('course_id')
+    user = request.user
+
+    try:
+        course = Course.objects.get(id=course_id)
+    except Course.DoesNotExist:
+        return Response({'detail': 'Course not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Check if the user is enrolled in the course
+    is_enrolled = Enrollment.objects.filter(course=course, user=user).exists()
+    return Response({'enrolled': is_enrolled}, status=status.HTTP_200_OK)
+
