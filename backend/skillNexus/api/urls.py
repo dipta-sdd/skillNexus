@@ -32,8 +32,10 @@ urlpatterns = [
     path('university/program/add', views.addProgram),
     path('university/program/get', views.getProgram),
     path('university/program/del', views.deelProgram),
+    path('program', views.getProgramStudent),
 
     path('course/add', views.addCourse),
+    path('course/enroll', views.enroll_course),
     path('course_lecture/add', views.addCourseLecture),
     path('course/get', views.getCourseDetail),
     path('course_list_single/get', views.getSingleCourseDetail),
@@ -46,6 +48,5 @@ urlpatterns = [
 
 
     path('lecture/get', views.get_lectures, name='get_lectures'),
-   
-
+    
 ]

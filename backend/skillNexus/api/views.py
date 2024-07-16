@@ -815,3 +815,28 @@ def get_lectures(request):
 
 
   
+@ api_view(['GET'])
+def getProgramStudent(req):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            f"select data_universityProgram.id,data_universityProgram.name, data_universityProgram.type , data_universityProgram.duration_year , data_universityProgram.duration_month , data_universityProgram.description , data_university.user_id, data_university.name , data_university.address from data_universityProgram , data_university where data_university.user_id = data_universityProgram.user_id")
+        edus = cursor.fetchall()
+        print(edus)
+        edus = [dict(zip(['id', 'name', 'type', 'duration_year', 'duration_month', 'description',
+                     'university_id', 'university_name', 'university_address'], edu)) for edu in edus]
+        print(edus)
+        return Response(edus, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def enroll_course(request):
+    user = request.user
+    course_id = request.data.get('course_id')
+    
+    try:
+        course = Course.objects.get(id=course_id)
+        enrollment = Enrollment(user=user, course=course)
+        enrollment.save()
+        return Response({'message': 'Course enrolled successfully'}, status=status.HTTP_201_CREATED)
+    except Course.DoesNotExist:
+        return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)

@@ -78,37 +78,37 @@
     <script>
   $(document).ready(function () {
     on_page_load([]);
-  $('#courseForm').submit(function (event) {
-    event.preventDefault(); // Prevent the default form submission
-    const url = window.location.href;
-    // Extract the value after the hyphen
-    const value = url.split('?')[1];
-    // Log the extracted value
-    console.log(value);
+      $('#courseForm').submit(function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        const url = window.location.href;
+        // Extract the value after the hyphen
+        const value = url.split('?')[1];
+        // Log the extracted value
+        console.log(value);
 
-    var formData = new FormData(this);
-    formData.append("course",value);
-    $.ajax({
-      url: 'http://127.0.0.1:8000/api/course_lecture/add',
-      type: 'POST',
-      headers: {
-        Authorization: "Bearer " + getCookie("token"),
-        'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')  // Add CSRF token
-      },
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function (response) {
-        alert('Lecture uploaded successfully!');
-        // You can redirect or update the page content here
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        alert('Failed to upload lecture: ' + textStatus);
-        console.log('Error details:', errorThrown, jqXHR.responseText);
-      }
+        var formData = new FormData(this);
+        formData.append("course",value);
+        $.ajax({
+          url: 'http://127.0.0.1:8000/api/course_lecture/add',
+          type: 'POST',
+          headers: {
+            Authorization: "Bearer " + getCookie("token"),
+            'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')  // Add CSRF token
+          },
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            alert('Lecture uploaded successfully!');
+            // You can redirect or update the page content here
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            alert('Failed to upload lecture: ' + textStatus);
+            console.log('Error details:', errorThrown, jqXHR.responseText);
+          }
+        });
+      });
     });
-  });
-});
 
   </script>
   </body>
