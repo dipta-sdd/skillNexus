@@ -32,3 +32,5 @@ $(document).on("click", ".target-skill.skill-flex .skill", function (e) {
   $(this).remove();
   $(`#skill${id}`).removeClass("d-none");
 });
+
+// hgghgh
