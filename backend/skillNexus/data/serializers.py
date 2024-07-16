@@ -138,3 +138,9 @@ class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = '__all__'
+
+
+class User_skillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_skill
+        fields = '__all__'

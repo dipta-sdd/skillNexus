@@ -40,37 +40,13 @@
               <li class="breadcrumb-item" aria-current="page">My Skills</li>
             </ol>
           </nav>
-          <!-- Modal -->
-          <div class="modal fade modal-lg" style="z-index: 6000" id="modal" tabindex="-1" aria-labelledby="myModel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5 my-color" id="myModel">Are you sure to add this skills?</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="target-skill skill-flex">
-                        <!-- selected skills gowes here -->
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Modal -->
+          
           
           <div class="row my-color mybg my-row">
             <div class="d-flex">
               <h2 class="flex-grow-1 mb-2 text-primary"><b>My Skills</b></h2>
               <div class="mb-2">
-                <a href="/my_program" class="btn btn-outline-primary d-none btn-save1" data-bs-toggle="modal" data-bs-target="#modal">
-                  Save
-                </a>
+                
                 <a class="btn btn-outline-primary btn-add" >
                   Add Skills
                 </a>
@@ -80,17 +56,22 @@
             <div class="col-12">
               <div class="row details">
                 <div class="col ">
-                  <div class="row px-5 details-con">
+                  <div class="row px-1 details-con">
                     <!-- <center class="text-danger">No skills found.</center> -->
-                    <div class="collapse" id="collapse">
+                    <div class="collapse mb-2" id="collapse">
                       <div class="card card-body">
-                        <strong class="mb-2">Select skills to add:</strong>
+                        <div class="row">
+                          <div class="col-11"><strong class="mb-2">Select skills to add:</strong></div>
+                          <div class="col-1"><button type="button" class="btn-close" aria-label="Close"></button></div>
+                        </div>
+                        
                         <div class="all-skill skill-flex">
                         
                         </div>
                       </div>
                     </div>
-                    
+                    <div class="my-skill skill-flex ">
+                        </div>
                     
                   </div>  
 

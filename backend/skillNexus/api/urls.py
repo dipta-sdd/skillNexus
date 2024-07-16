@@ -33,6 +33,10 @@ urlpatterns = [
     path('university/program/get', views.getProgram),
     path('university/program/del', views.deelProgram),
     path('program', views.getProgramStudent),
+    path('skills/all', views.allSkill),
+    path('skills/add', views.addSkill),
+    path('skills/get', views.getSkill),
+    path('skills/del', views.delSkill),
 
     path('course/add', views.addCourse),
     path('course/enroll', views.enroll_course),
@@ -48,5 +52,5 @@ urlpatterns = [
 
 
     path('lecture/get', views.get_lectures, name='get_lectures'),
-    
+
 ]

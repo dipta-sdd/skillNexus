@@ -199,8 +199,14 @@ class Skill(models.Model):
     name = models.CharField(max_length=100, blank=False)
 
 
+class User_skill(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'skill')
+
+
 class Enrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-
-    
