@@ -197,3 +197,10 @@ class CourseLecture(models.Model):
 
 class Skill(models.Model):
     name = models.CharField(max_length=100, blank=False)
+
+
+class Enrollment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    

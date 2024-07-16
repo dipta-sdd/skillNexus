@@ -109,18 +109,19 @@
         $("#course").append(`
           <div class="col-12">
             <div class="video-card ms-5">
-              <center><h3>Showing Lecture Details</h3></center><br>
+              <center><h2 style="color:blue;">Showing Lecture Details</h2></center><br>
               <div class="video-thumbnail">
-                <video src="${apiLink + courseLecture.video}" controls style="width: 90%; "></video>
+               <center> <video src="${apiLink + courseLecture.video}" controls style="width: 100%; "></video></center>
               </div>
               <div class="video-details">
-                <h3 class="video-title my-color">Title : ${courseLecture.title}</h3>
-                <p class="video-description my-color" style="font-family:cursive">Description : ${courseLecture.lecture_description}</p>
-                <div class="course-actions" >
-                    <a href="/edit_video?${courseLecture.id}" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a></center>
-                </div>
-
+                <h4 class="video-title my-color">Lecture title : ${courseLecture.title}</h4>
+                
+                <h4 class="video-description my-color" style="font-family:cursive;">Lecture Description : ${courseLecture.lecture_description}</h4>
+                <a href="${apiLink + courseLecture.material}" target="_blank" class="btn btn-sm btn-outline-secondary">Download Material</a>
+                <a href="#" class="btn btn-danger" style="float:right;">Delete</a></center> &nbsp &nbsp
+                <a href="/edit_video?${courseLecture.id}" class="btn btn-primary" style="float:right;">Edit Lecture</a>
+                
+                
               </div>
             </div>
           </div>

@@ -1,10 +1,7 @@
 const url = window.location.href;
-  // Extract the value after the hyphen
-  const value = url.split('?')[1];
-  // Log the extracted value
-  console.log(value);
+const value = url.split('?')[1];
 
-  $(document).ready(function () {
+$(document).ready(function () {
     // Fetch courses on page load
     $.ajax({
         type: "GET",
@@ -13,7 +10,7 @@ const url = window.location.href;
             Authorization: "Bearer " + getCookie("token"),
         },
         data:{
-            course_id:value,
+            course_id: value,
         },
         success: function (res) {
             $("#course").html("");
@@ -33,15 +30,14 @@ const url = window.location.href;
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="${apiLink+course.course_thumbnil}" class="img-fluid rounded-start" alt="Course Thumbnail" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="${apiLink + course.course_thumbnil}" class="img-fluid rounded-start" alt="Course Thumbnail" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">${course.title}</h5>
                                 <p class="card-text my-color">${course.course_outcome}</p>
                                 <p class="card-text"><small class="text-muted">Course Info : ${course.course_fee} $</small></p>
-                                <a href="/edit_detail?${course.id}" class="btn btn-primary" id="enroll">Enroll Now</a>
-                                
+                                <a href="#" class="btn btn-primary enroll-btn" data-course-id="${course.id}">Enroll Now</a>
                             </div>
                         </div>
                     </div>
@@ -92,12 +88,45 @@ const url = window.location.href;
                 </div>
             </div>
         `);
-    } 
-    
-    $(document).on("click","#enroll",function(e) {
+    }
+
+    // Handle enrollment button click
+    $(document).on("click", ".enroll-btn", function (e) {
         e.preventDefault();
-        $('#addTrainModel').modal('show');
+        const courseId = $(this).data('course-id');
+    
+        // AJAX call to enroll in the course
+        $.ajax({
+            type: 'POST',
+            url: apiLink + '/api/course/enroll',
+            headers: {
+                Authorization: 'Bearer ' + getCookie('token'),
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify({ course_id: courseId }),
+            success: function (res) {
+                showToast('Course enrolled successfully');
+                $('#addTrainModel').modal('hide');
+            },
+            error: function (err) {
+                console.error('Failed to enroll in course:', err);
+            }
+        });
     });
     
-  }); 
 
+    function showToast(message) {
+        $('.toast-container').append(`
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Notification</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    ${message}
+                </div>
+            </div>
+        `);
+        $('.toast').toast('show');
+    }
+});

@@ -660,11 +660,11 @@ def delcourse(req):
 def addCourseLecture(req):
     print('_____________________add Lecture_______________________')
     user = getUser(req)
-    print(user)
+    #print(user)
     print(req.data)
     data = req.data.dict()
     data['user'] = user['id']
-
+    print(data)
     serializer = CourseLectureSeriallizer(data=data)
     if serializer.is_valid():
         serializer.save()
@@ -795,6 +795,26 @@ def getSingleCourseDetail(req):
         return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
 
 
+
+
+
+@api_view(['GET'])
+def get_lectures(request):
+    course_id = request.query_params.get('course_id')
+    if not course_id:
+        return Response({'error': 'Course ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        lectures = CourseLecture.objects.filter(course_id=course_id)
+        serializer = CourseLectureSeriallizer(lectures, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except CourseLecture.DoesNotExist:
+        return Response({'error': 'Lectures not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+
+
+  
 @ api_view(['GET'])
 def getProgramStudent(req):
     with connection.cursor() as cursor:
@@ -806,3 +826,17 @@ def getProgramStudent(req):
                      'university_id', 'university_name', 'university_address'], edu)) for edu in edus]
         print(edus)
         return Response(edus, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def enroll_course(request):
+    user = request.user
+    course_id = request.data.get('course_id')
+    
+    try:
+        course = Course.objects.get(id=course_id)
+        enrollment = Enrollment(user=user, course=course)
+        enrollment.save()
+        return Response({'message': 'Course enrolled successfully'}, status=status.HTTP_201_CREATED)
+    except Course.DoesNotExist:
+        return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)

@@ -20,6 +20,7 @@ $(document).ready(function () {
     // Function to display course details
     function showCourse(course) {
         $("#course").append(`
+             <center><h2 style="color:blue;">View Course</h2></center><br>
             <div class="course-list-item" data-course-id="${course.id}">
                 <img src="${apiLink + course.course_thumbnil}" class="course-thumbnail" alt="Course Thumbnail">
                 <div class="course-details">
