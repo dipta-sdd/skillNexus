@@ -135,10 +135,7 @@
               <a href="/course_list"
                 ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Course List</a>
             </li>
-            <li class=" d-none u-Student">
-              <a href="/course_list"
-                ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Course List</a>
-            </li>
+            
             <li class=" d-none u-Student">
               <a href="/program"
                 ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Program</a
