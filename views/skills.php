@@ -21,6 +21,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../style/style.css" />
+    <link rel="stylesheet" href="../style/skills.css" />
   </head>
   <body>
     <div aria-live="polite" aria-atomic="true" class="position-relative">
@@ -29,6 +30,8 @@
       </div>
     </div>
     <?php include 'sidebar.php' ?>
+      
+
   
         <div class="my-round" id="body">
           <nav aria-label="breadcrumb" class="mybg-t breadcrumb">
@@ -37,13 +40,39 @@
               <li class="breadcrumb-item" aria-current="page">My Skills</li>
             </ol>
           </nav>
-
+          <!-- Modal -->
+          <div class="modal fade modal-lg" style="z-index: 6000" id="modal" tabindex="-1" aria-labelledby="myModel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5 my-color" id="myModel">Are you sure to add this skills?</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="target-skill skill-flex">
+                        <!-- selected skills gowes here -->
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          
           <div class="row my-color mybg my-row">
             <div class="d-flex">
               <h2 class="flex-grow-1 mb-2 text-primary"><b>My Skills</b></h2>
               <div class="mb-2">
-                <a href="/my_program" class="btn btn-outline-primary btn-add" data-bs-toggle="modal" data-bs-target="#addProgram">
-                  button title
+                <a href="/my_program" class="btn btn-outline-primary d-none btn-save1" data-bs-toggle="modal" data-bs-target="#modal">
+                  Save
+                </a>
+                <a class="btn btn-outline-primary btn-add" >
+                  Add Skills
                 </a>
               </div>
             </div>
@@ -52,7 +81,17 @@
               <div class="row details">
                 <div class="col ">
                   <div class="row px-5 details-con">
-                    <center class="text-danger">No skills found.</center>
+                    <!-- <center class="text-danger">No skills found.</center> -->
+                    <div class="collapse" id="collapse">
+                      <div class="card card-body">
+                        <strong class="mb-2">Select skills to add:</strong>
+                        <div class="all-skill skill-flex">
+                        
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
                   </div>  
 
 
@@ -78,9 +117,10 @@
 
     <script src="../script/jquery-3.7.1.min.js"></script>
     <script src="../script/script.js"></script>
+    <script src="../script/skills.js"></script>
     <script>
       $(document).ready(function () {
-        on_page_load([]);
+        on_page_load(['Student']);
       });
     </script>
   </body>

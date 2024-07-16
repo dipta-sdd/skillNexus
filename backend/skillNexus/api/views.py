@@ -660,7 +660,7 @@ def delcourse(req):
 def addCourseLecture(req):
     print('_____________________add Lecture_______________________')
     user = getUser(req)
-    #print(user)
+    # print(user)
     print(req.data)
     data = req.data.dict()
     data['user'] = user['id']
@@ -795,7 +795,14 @@ def getSingleCourseDetail(req):
         return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
 
 
-
+@ api_view(['GET'])
+def allSkill(req):
+    try:
+        obj = Skill.objects.all()
+        skills = SkillSeriallizer(obj, many=True)
+        return Response(skills.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'message': 'No skill found.'}, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['GET'])
@@ -810,11 +817,8 @@ def get_lectures(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     except CourseLecture.DoesNotExist:
         return Response({'error': 'Lectures not found'}, status=status.HTTP_404_NOT_FOUND)
-    
 
 
-
-  
 @ api_view(['GET'])
 def getProgramStudent(req):
     with connection.cursor() as cursor:
@@ -832,7 +836,7 @@ def getProgramStudent(req):
 def enroll_course(request):
     user = request.user
     course_id = request.data.get('course_id')
-    
+
     try:
         course = Course.objects.get(id=course_id)
         enrollment = Enrollment(user=user, course=course)
