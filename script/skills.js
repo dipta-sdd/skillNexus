@@ -27,7 +27,7 @@ $.ajax({
   },
 });
 
-$(document).on("click");
+//$(document).on("click");
 $(".btn-add").click(function (e) {
   e.preventDefault();
   $("#collapse").collapse("show");
