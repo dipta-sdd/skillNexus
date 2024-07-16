@@ -2,3 +2,5 @@ venv
 env
 p
 dp
+__pycache__
+migrations
