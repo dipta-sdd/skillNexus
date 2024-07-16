@@ -89,7 +89,7 @@
         var formData = new FormData(this);
         formData.append("course",value);
         $.ajax({
-          url: 'http://127.0.0.1:8000/api/course_lecture/add',
+          url: 'api/course_lecture/add',
           type: 'POST',
           headers: {
             Authorization: "Bearer " + getCookie("token"),

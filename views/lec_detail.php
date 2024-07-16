@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SkilNexus</title>
   <link href="../style/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../style/style.css" />
   <style>
     .course-list-item {
@@ -21,35 +21,64 @@
       width: 70%;
       height: 70%;
       object-fit: cover;
-    
     }
     .course-details {
-      flex-grow: 1;
+      flex-grow: 2;
+      padding: 0 20px;
     }
     .course-title {
       margin: 0;
-      font-size: 1.5rem; /* increased size */
+      font-size: 1.8rem; /* Increased size */
       font-weight: bold;
+      color: #343a40;
     }
     .course-outcome {
       margin: 10px 0;
-      font-family:cursive;
-      font-size: 1rem; /* increased size */
+      font-family: cursive;
+      font-size: 1.1rem; /* Increased size */
+      color: #6c757d;
     }
     .course-actions {
       display: flex;
       align-items: center;
-      /* margin-left: 400px; */
       gap: 10px; /* Adjust the gap between buttons */
     }
     .course-actions button {
-      /* margin-bottom: 5px; */
-      width: 100px;
+      width: 120px;
     }
     .modal-content {
       font-size: 1rem; /* Adjust modal font size */
     }
-  
+    .video-card {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .video-thumbnail video {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .video-details {
+      padding: 10px 0;
+    }
+    .video-title {
+      color: #007bff;
+      font-weight: bold;
+    }
+    .video-description {
+      font-family: cursive;
+      color: #343a40;
+    }
+    .btn-outline-secondary {
+      color: #343a40;
+      border-color: #343a40;
+    }
+    .btn-outline-secondary:hover {
+      background-color: #343a40;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -69,14 +98,12 @@
     <!-- main body-->
     <div class="row my-color mybg my-row" id="course" style="font-family: cursive">
       <!-- Edit Modal -->
-     
     </div>
     <!-- main body-->
   </div>
   <script src="../script/bootstrap.bundle.min.js"></script>
   <script src="../script/jquery-3.7.1.min.js"></script>
   <script src="../script/script.js"></script>
- 
   <script>
     $(document).ready(function () {
       on_page_load([]);
@@ -109,19 +136,16 @@
         $("#course").append(`
           <div class="col-12">
             <div class="video-card ms-5">
-              <center><h2 style="color:blue;">Showing Lecture Details</h2></center><br>
+              
               <div class="video-thumbnail">
-               <center> <video src="${apiLink + courseLecture.video}" controls style="width: 100%; "></video></center>
+                <center><video src="${apiLink + courseLecture.video}" controls></video></center>
               </div>
               <div class="video-details">
-                <h4 class="video-title my-color">Lecture title : ${courseLecture.title}</h4>
-                
-                <h4 class="video-description my-color" style="font-family:cursive;">Lecture Description : ${courseLecture.lecture_description}</h4>
+                <h4 class="video-title">Lecture title: ${courseLecture.title}</h4>
+                <h4 class="video-description">Lecture Description: ${courseLecture.lecture_description}</h4>
                 <a href="${apiLink + courseLecture.material}" target="_blank" class="btn btn-sm btn-outline-secondary">Download Material</a>
-                <a href="#" class="btn btn-danger" style="float:right;">Delete</a></center> &nbsp &nbsp
-                <a href="/edit_video?${courseLecture.id}" class="btn btn-primary" style="float:right;">Edit Lecture</a>
-                
-                
+                <a href="#" class="btn btn-danger" style="float:right;">Delete</a>
+                <a href="/edit_video?${courseLecture.id}" class="btn btn-primary" style="float:right; margin-left:40px">Edit Lecture</a> &nbsp
               </div>
             </div>
           </div>

@@ -52,7 +52,9 @@ urlpatterns = [
     
     path('course_list_single/get', views.get_course_list_single, name='course_list_single'),
     path('course_enroll/add', views.course_enroll, name='course_enroll'),
-    path('course_enroll/check', views.check_enrollment)
+    path('course_enroll/check', views.check_enrollment),
+    path('enrolled_course_video/get', views.getEnrolledCourseVideo)
+
     
     
 ]

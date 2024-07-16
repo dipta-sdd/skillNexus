@@ -606,6 +606,7 @@ def deelProgram(req):
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+
 @ api_view(['POST'])
 def addCourse(req):
     print('_____________________add training_______________________')
@@ -742,6 +743,51 @@ def getCourseVideo(req):
         return Response(course.data, status=status.HTTP_200_OK)
     except:
         return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+# @api_view(['GET'])
+# def getEnrolledCourseVideo(req):
+#     user = getUser(req)
+#     try:
+#         if 'course_id' in req.query_params:
+#             course_id = req.query_params['course_id']
+           
+
+#             enrollment = Enrollment.objects.filter(user=user['id'], course_id=course_id).exists()
+#             if enrollment:
+#                 objs = CourseLecture.objects.filter(course_id=course_id)
+#             else:
+#                 return Response({'msg': 'Not Enrolled in Course'}, status=status.HTTP_403_FORBIDDEN)
+#         else:
+#             return Response({'msg': 'Course ID not provided'}, status=status.HTTP_400_BAD_REQUEST)
+#         print(objs)
+#         course = CourseLectureSeriallizer(objs, many=True)
+#         return Response(course.data, status=status.HTTP_200_OK)
+#     except:
+#         return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
+@api_view(['GET'])
+def getEnrolledCourseVideo(req):
+    user = getUser(req)
+    try:
+        if 'course_id' in req.query_params and 'lecture_id' in req.query_params:
+            course_id = req.query_params['course_id']
+            lecture_id = req.query_params['lecture_id']
+
+            enrollment = Enrollment.objects.filter(user=user['id'], course_id=course_id).exists()
+            if enrollment:
+                objs = CourseLecture.objects.filter(course_id=course_id, id=lecture_id)
+            else:
+                return Response({'msg': 'Not Enrolled in Course'}, status=status.HTTP_403_FORBIDDEN)
+        else:
+            return Response({'msg': 'Course ID or Lecture ID not provided'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if objs.exists():
+            course = CourseLectureSeriallizer(objs, many=True)
+            return Response(course.data, status=status.HTTP_200_OK)
+        else:
+            return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
+    except Exception as e:
+        return Response({'msg': f'Error: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['POST'])
