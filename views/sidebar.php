@@ -116,9 +116,24 @@
                 ><span class="fa-solid fa-hammer"></span> &nbsp Trainings</a
               >
             </li>
+            <li class=" d-none u-Educator">
+              <a href="/create_course"
+                ><span class="fa-solid fa-plus"></span> &nbsp Create Course</a
+              >
+            </li>
+            <li class=" d-none u-Educator">
+              <a href="/all_course_detail"
+                ><span class="fa-solid fa-hammer"></span> &nbsp See Details</a
+              >
+            </li>
             <li class=" d-none u-Student">
               <a href="/experience"
                 ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Experience</a
+              >
+            </li>
+            <li class=" d-none u-Student">
+              <a href="/course_list"
+                ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Course List</a
               >
             </li>
             <li class=" d-none u-University">

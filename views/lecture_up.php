@@ -80,9 +80,14 @@
     on_page_load([]);
   $('#courseForm').submit(function (event) {
     event.preventDefault(); // Prevent the default form submission
+    const url = window.location.href;
+    // Extract the value after the hyphen
+    const value = url.split('?')[1];
+    // Log the extracted value
+    console.log(value);
 
     var formData = new FormData(this);
-
+    formData.append("course",value);
     $.ajax({
       url: 'http://127.0.0.1:8000/api/course_lecture/add',
       type: 'POST',

@@ -211,7 +211,7 @@ class Course(models.Model):
 
 
 class CourseLecture(models.Model):
-    user = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
     title = models.CharField(max_length=1000, blank=False)
     lecture_description = models.CharField(max_length=1000, blank=False)

@@ -660,11 +660,11 @@ def delcourse(req):
 def addCourseLecture(req):
     print('_____________________add Lecture_______________________')
     user = getUser(req)
-    print(user)
+    #print(user)
     print(req.data)
     data = req.data.dict()
     data['user'] = user['id']
-
+    print(data)
     serializer = CourseLectureSeriallizer(data=data)
     if serializer.is_valid():
         serializer.save()
@@ -793,3 +793,25 @@ def getSingleCourseDetail(req):
         return Response(course.data, status=status.HTTP_200_OK)
     except:
         return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+
+@api_view(['GET'])
+def get_lectures(request):
+    course_id = request.query_params.get('course_id')
+    if not course_id:
+        return Response({'error': 'Course ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        lectures = CourseLecture.objects.filter(course_id=course_id)
+        serializer = CourseLectureSeriallizer(lectures, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except CourseLecture.DoesNotExist:
+        return Response({'error': 'Lectures not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+
+
+  

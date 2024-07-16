@@ -41,6 +41,11 @@ urlpatterns = [
     path('course_video/get', views.getCourseVideo),
     path('course_video/edit', views.edit_course_video),
     path('course/edit', views.editCourse),
-    path('course_list/get', views.courselist)
+    path('course_list/get', views.courselist),
+
+
+
+    path('lecture/get', views.get_lectures, name='get_lectures'),
+   
 
 ]

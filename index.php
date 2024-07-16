@@ -39,19 +39,31 @@ switch ($requests[0]) {
     case 'programs' :
     require __DIR__ . '/views/programs.php';
     break;
-    
-    case 'lecture_upload' :
+    // -------------------------------------------------------------------------------
+    case 'lecture_up' :
             require __DIR__ . '/views/lecture_up.php';
             break;
-
+    
     case 'all_course_detail' :
                 require __DIR__ . '/views/all_course_detail.php';
                 break;
     case 'course_detail' :
                 require __DIR__ . '/views/course_detail.php';
                  break;
+    case 'course_list' :
+          require __DIR__ . '/views/course_list.php';
+           break;
+    case 'course_list_single' :
+            require __DIR__ . '/views/course_list_single.php';
+             break;
     case 'edit_detail' :
              require __DIR__ . '/views/edit_detail.php';
+            break;
+    case 'edit_video' :
+             require __DIR__ . '/views/edit_video.php';
+            break;
+    case 'create_course' :
+            require __DIR__ . '/views/create_course.php';
             break;
     case 'lec_detail' :
         require __DIR__ . '/views/lec_detail.php';
