@@ -1,4 +1,4 @@
-
+from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -210,7 +210,7 @@ class User_skill(models.Model):
 class Enrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    enrolled_on = models.DateTimeField(auto_now_add=True)
+    enrolled_on = models.DateTimeField(default=datetime.now)
 
     class Meta:
         unique_together = ('user', 'course')
