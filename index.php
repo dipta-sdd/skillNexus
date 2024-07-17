@@ -42,6 +42,8 @@ switch ($requests[0]) {
     require __DIR__ . '/views/programs.php';
     break;
     // -------------------------------------------------------------------------------
+
+
     case 'lecture_up' :
         require __DIR__ . '/views/programs.php';
         break;
@@ -76,6 +78,9 @@ switch ($requests[0]) {
             break;
     case 'lec_detail' :
         require __DIR__ . '/views/lec_detail.php';
+        break;
+    case 'student_view_lec_detail' :
+        require __DIR__ . '/views/student_view_lec_detail.php';
         break;
     case 'training' :
         require __DIR__ . '/views/training.php';

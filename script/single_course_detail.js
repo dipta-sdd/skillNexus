@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     function showCourse(course) {
         $("#course").append(`
-            <div class="col-12 col-md-8 mx-auto my-3">
+            <div class="col-12 col-md-12 mx-auto my-3">
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
