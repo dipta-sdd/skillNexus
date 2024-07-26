@@ -9,6 +9,8 @@ from data.models import *
 from data.serializers import *
 from django.contrib.auth.hashers import check_password
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.db.models import Q
+import json
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
@@ -1080,3 +1082,33 @@ def check_enrollment(request):
     # Check if the user is enrolled in the course
     is_enrolled = Enrollment.objects.filter(course=course, user=user).exists()
     return Response({'enrolled': is_enrolled}, status=status.HTTP_200_OK)
+
+
+@ api_view(['POST'])
+def allUsers(req):
+    user = getUser(req)
+    data = req.data.dict()
+    role = json.loads(data['role'])
+    sta = json.loads(data['status'])
+    print(role)
+    if user['role'] != 'Admin':
+        return Response({'msg': 'Unauthorized user.'}, status=status.HTTP_401_UNAUTHORIZED)
+    try:
+        objs = User.objects.filter(role__in=role, status__in=sta).exclude(role='').order_by(
+            data['sort_by'])
+        users = UserListSerializer(objs, many=True)
+        return Response(users.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'No User Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ api_view(['POST'])
+def editStatus(req):
+    user = getUser(req)
+    data = req.data.dict()
+    user = User.objects.get(id=data['id'])
+    serializer = UserListSerializer(user, data=data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

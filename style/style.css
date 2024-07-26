@@ -855,3 +855,7 @@ input:checked+.slider:before {
     padding-bottom: .3em;
     padding-left: .3em;
  }
+
+ .btn{
+    padding: .2em .4em;
+ }

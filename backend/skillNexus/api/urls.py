@@ -37,6 +37,10 @@ urlpatterns = [
     path('skills/add', views.addSkill),
     path('skills/get', views.getSkill),
     path('skills/del', views.delSkill),
+    path('admin/users', views.allUsers),
+    path('admin/user/status', views.editStatus),
+
+
 
     path('course/add', views.addCourse),
 

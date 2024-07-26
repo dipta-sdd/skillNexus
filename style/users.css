@@ -1,0 +1,21 @@
+td i.fa-solid{
+    cursor: pointer;
+    margin-left: .3em;
+    color: blue;
+}
+td i.fa-solid:hover{
+    color: aqua;
+}
+td .form-control{
+    display: inline;
+    width: auto;
+}
+
+td button:disabled{
+    border: none;
+}
+
+label.btn{
+    padding: 0em .2em;
+}
+

@@ -151,6 +151,11 @@
                 ><span class="fa-solid fa-wand-magic-sparkles"></span> &nbsp Programs</a
               >
             </li>
+            <li class=" d-none u-Admin">
+              <a href="/users"
+                ><span class="fa-solid fa-user"></span> &nbsp Users</a
+              >
+            </li>
             
             <li>
               <a href="#"><i class="fa-solid fa-headset"></i> &nbsp Support</a>
