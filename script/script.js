@@ -95,7 +95,6 @@ function on_page_load(reqs) {
     },
   })
     .then(function (user) {
-      //console.log(user);
       localStorage.setItem("user", JSON.stringify(user));
       $(".logged-in").removeClass("d-none");
       $(`.u-${user.role}`).removeClass("d-none");
@@ -108,11 +107,16 @@ function on_page_load(reqs) {
       // check requierd user type
       if (reqs == "auth") {
         setTimeout(() => {
-          console.log("ttttt");
+          if (user.status == "Suspended") {
+            location.replace("/suspended");
+          }
           location.replace("/profile");
           hide_loader();
         }, 10);
       } else if (reqs.length) {
+        if (user.status == "Suspended") {
+          location.replace("/suspended");
+        }
         let status = false;
         reqs.map((req) => {
           if (user.role == req) {
@@ -124,6 +128,9 @@ function on_page_load(reqs) {
         }
         hide_loader();
       } else {
+        if (user.status == "Suspended") {
+          location.replace("/suspended");
+        }
         hide_loader();
       }
     })

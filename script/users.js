@@ -76,9 +76,11 @@ function showUser(user) {
             <td>${user.role}</td>
             <td>${convertUTCToLocalTime(user.date_joined)}</td>
             <td>${convertUTCToLocalTime(user.last_login)}</td>
-            <td id="parent${user.id}"> <span class="text-${col[user.status]}">${
-    user.status
-  }</span>
+            <td id="parent${
+              user.id
+            }" class="users-loader-con"> <span class="text-${
+    col[user.status]
+  }">${user.status}</span>
                 <button type="button" target-status="Active" target-id="${
                   user.id
                 }" class="${
@@ -99,6 +101,7 @@ function showUser(user) {
     user.role == "Admin" ? "disabled" : ""
   }></button>
                 
+                <div class="users-loader"></div>
 
             </td>
         </tr>
@@ -121,6 +124,7 @@ $(document).on("click", "button.fa-solid", function (e) {
   let id = $(this).attr("target-id");
   let status = $(this).attr("target-status");
   let prev_status = $(`td#parent${id} span`).text();
+  $(`td#parent${id} .users-loader`).addClass("show");
   $.ajax({
     type: "POST",
     url: "api/admin/user/status",
@@ -142,6 +146,8 @@ $(document).on("click", "button.fa-solid", function (e) {
       $(`td#parent${id} button[target-status=${prev_status}]`).removeClass(
         "d-none"
       );
+
+      $(`td#parent${id} .users-loader`).removeClass("show");
     },
   });
 });

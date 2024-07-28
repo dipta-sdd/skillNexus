@@ -54,29 +54,20 @@
                   <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     
                     <strong class="my-color pe-2">Status:</strong>
-                    <input value="Active" type="checkbox" class="sta" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">Active</label>
-                    <input value="Suspended" type="checkbox" class="sta" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">Suspended</label>
-                    <input value="Banned" type="checkbox" class="sta" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">Banned</label>
+                    <input value="Active" type="checkbox" class="mx-2 sta" autocomplete="off">Active</input>
+                    <input value="Suspended" type="checkbox" class="mx-2 sta" autocomplete="off">Suspended</input>
+                    <input value="Banned" type="checkbox" class="mx-2 sta" autocomplete="off">Banned</input>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     <strong class="my-color pe-2">Role:</strong>
-                    <input value="Student" type="checkbox" class="role" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">Student</label>
-                    <input value="Frelencer" type="checkbox" class="role" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">Frelencer</label>
-                    <input value="Educator" type="checkbox" class="role" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">Educator</label>
-                    <input value="Employer" type="checkbox" class="role" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">Employer</label>
-                    <input value="University" type="checkbox" class="role" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">University</label>
-                    <input value="Admin" type="checkbox" class="role" autocomplete="off">
-                    <label class="my-color pe-3 ps-1">Admin</label>
+                      <input value="Student" type="checkbox" class="mx-2 role" autocomplete="off">Student</input>
+                      <input value="Frelencer" type="checkbox" class="mx-2 role" autocomplete="off">Frelencer</input>
+                      <input value="Educator" type="checkbox" class="mx-2 role" autocomplete="off">Educator</input>
+                      <input value="Employer" type="checkbox" class="mx-2 role" autocomplete="off">Employer</input>
+                      <input value="University" type="checkbox" class="mx-2 role" autocomplete="off">University</input>
+                      <input value="Admin" type="checkbox" class="mx-2 role" autocomplete="off">Admin</input>
                   </div>
                 </div>
               </div>
@@ -117,7 +108,7 @@
                     <th>Role</th>
                     <th>Joined</th>
                     <th>Last Login</th>
-                    <th style="min-width:50%">Status</th>
+                    <th style="min-width:11em">Status</th>
                   </tr>
                   </thead>
                   <tbody class="table-group-divider">
@@ -148,7 +139,7 @@
     <script src="../script/users.js"></script>
     <script>
       $(document).ready(function () {
-        on_page_load([]);
+        on_page_load(['Admin']);
       });
     </script>
   </body>

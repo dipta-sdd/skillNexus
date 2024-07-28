@@ -31,6 +31,8 @@ def getUser(request):
 def current_user(request):
     if isinstance(request.user, User):
         serializer = UserSerializer(request.user)
+        if serializer.data['status'] == 'Banned':
+            return Response({"message": "Banned"}, status=status.HTTP_401_UNAUTHORIZED)
         return Response(serializer.data)
     else:
         return Response({"detail": "Authentication credentials were not provided."}, status=401)
@@ -78,14 +80,13 @@ def login_view(request):
         if serializer.is_valid():
             username = serializer.validated_data['username']
             raw_password = serializer.validated_data['password']
-            print('here')
-            # Retrieve the user from the database using the provided username
             user = User.objects.get(username=username)
-            # Check if the provided raw password matches the hashed password in the database
+            user_data = UserSerializer(user).data
+            print(user_data)
+            if user_data['status'] == 'Banned':
+                return Response({"message": "Sorry you are banned"}, status=status.HTTP_401_UNAUTHORIZED)
             if check_password(raw_password, user.password):
                 login(request, user)
-
-                # Generate JWT tokens
                 refresh = RefreshToken.for_user(user)
                 access_token = str(refresh.access_token)
 
