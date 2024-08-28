@@ -127,7 +127,7 @@ $(document).on("click", "button.fa-solid", function (e) {
   $(`td#parent${id} .users-loader`).addClass("show");
   $.ajax({
     type: "POST",
-    url: "api/admin/user/status",
+    url: apiLink + "/api/admin/user/status",
     headers: {
       Authorization: "Bearer " + getCookie("token"),
     },

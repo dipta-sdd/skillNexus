@@ -1,4 +1,3 @@
-console.log("script");
 let currentURL = window.location.href;
 let urlParts = currentURL.split("/");
 let thirdSlashPart = urlParts.slice(0, 3).join("/");
@@ -9,7 +8,6 @@ if (apiLink == "https://skill-nexus.sankarsan.xyz") {
 } else {
   apiLink = "http://127.0.0.1:8000";
 }
-
 function toObj(arr) {
   var obj = {};
   for (var i = 0; i < arr.length; i++) {
@@ -73,8 +71,6 @@ function deleteCookie(name) {
 
 // get current user from cookie and save it to local storage
 function on_page_load(reqs) {
-  // change theme to light default
-  // $("body").addClass("theme-light");
   let current_theme = localStorage.getItem("theme");
   if (current_theme == "dark") {
     goDark();
@@ -147,9 +143,7 @@ function on_page_load(reqs) {
 
 function get_user() {
   let ret = JSON.parse(localStorage.getItem("user"));
-
   return ret;
-  // return localStorage.getItem("user");
 }
 
 // on click logout
@@ -197,8 +191,10 @@ function goDark() {
 // change theme to light
 function goLight() {
   $("#body").attr("data-bs-theme", "light");
-  $("body").css("--bg", "#ffffff");
-  $("body").css("--bg2", "#ffffffc7");
+  $("body").css("--bg", "#ECF0F1");
+  $("body").css("--bg2", "#ECF0F1c7");
+  // $("body").css("--bg", "#ffffff");
+  // $("body").css("--bg2", "#ffffffc7");
   $("body").css("--color", "#000000");
   $("body").addClass("theme-light");
   $("body").removeClass("theme-dark");

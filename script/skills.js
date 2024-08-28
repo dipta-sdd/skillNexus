@@ -1,6 +1,6 @@
 $.ajax({
   type: "GET",
-  url: "api/skills/all",
+  url: apiLink + "/api/skills/all",
   success: function (response) {
     response.map(function (skill) {
       $(".all-skill.skill-flex").append(`
@@ -9,7 +9,7 @@ $.ajax({
     });
     $.ajax({
       type: "GET",
-      url: "api/skills/get",
+      url: apiLink + "/api/skills/get",
       headers: {
         Authorization: "Bearer " + getCookie("token"),
       },
@@ -42,7 +42,7 @@ $(document).on("click", ".all-skill.skill-flex .skill", function (e) {
   let id = $(this).attr("data-target");
   $.ajax({
     type: "POST",
-    url: "api/skills/add",
+    url: apiLink + "/api/skills/add",
     headers: {
       Authorization: "Bearer " + getCookie("token"),
     },
@@ -64,7 +64,7 @@ $(document).on("click", ".my-skill.skill-flex .skill", function (e) {
   let id = $(this).attr("data-target");
   $.ajax({
     type: "DELETE",
-    url: "api/skills/del",
+    url: apiLink + "/api/skills/del",
     headers: {
       Authorization: "Bearer " + getCookie("token"),
     },
