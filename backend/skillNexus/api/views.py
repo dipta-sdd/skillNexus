@@ -765,6 +765,10 @@ def getCourseVideo(req):
 #         return Response(course.data, status=status.HTTP_200_OK)
 #     except:
 #         return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
 @api_view(['GET'])
 def getEnrolledCourseVideo(req):
     user = getUser(req)
@@ -839,6 +843,10 @@ def getSingleCourseDetail(req):
         return Response(course.data, status=status.HTTP_200_OK)
     except:
         return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
 
 
 
@@ -929,3 +937,40 @@ def check_enrollment(request):
     is_enrolled = Enrollment.objects.filter(course=course, user=user).exists()
     return Response({'enrolled': is_enrolled}, status=status.HTTP_200_OK)
 
+
+
+
+
+
+@api_view(['GET'])
+def get_enrolled_users(request):
+    course_id = request.GET.get('course_id')
+    if not course_id:
+        return Response({"error": "Course ID is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        course = Course.objects.get(id=course_id)
+        enrolled_users = Enrollment.objects.filter(course=course)
+        users = [enrollment.user for enrollment in enrolled_users]
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Course.DoesNotExist:
+        return Response({"error": "Course not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+
+
+
+@api_view(['DELETE'])
+def ban_user_from_course(request):
+    course_id = request.data.get('course_id')
+    user_id = request.data.get('user_id')
+
+    if not course_id or not user_id:
+        return Response({"error": "Course ID and User ID are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        enrollment = Enrollment.objects.get(course_id=course_id, user_id=user_id)
+        enrollment.delete()
+        return Response({"message": "User has been banned successfully."}, status=status.HTTP_204_NO_CONTENT)
+    except Enrollment.DoesNotExist:
+        return Response({"error": "Enrollment not found"}, status=status.HTTP_404_NOT_FOUND)

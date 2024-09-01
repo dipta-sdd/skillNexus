@@ -26,6 +26,78 @@ $(document).ready(function () {
         },
     });
 
+    // function showCourse(course) {
+    //     $("#course").append(`
+    //         <div class="col-12 col-md-12 mx-auto my-3">
+    //             <div class="card mb-3">
+    //                 <div class="row g-0">
+    //                     <div class="col-md-4">
+    //                         <img src="${apiLink + course.course_thumbnil}" class="img-fluid rounded-start" alt="Course Thumbnail" style="width: 100%; height: 100%; object-fit: cover;">
+    //                     </div>
+    //                     <div class="col-md-8">
+    //                         <div class="card-body">
+    //                             <h5 class="card-title">${course.title}</h5>
+    //                             <p class="card-text my-color">${course.course_outcome}</p>
+    //                             <p class="card-text"><small class="text-muted">Course Info : ${course.course_fee} $</small></p>
+    //                             <a href="/edit_detail?${course.id}" class="btn btn-primary">Edit Course</a>
+    //                             <a href="#" class="btn btn-danger">Delete</a>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             <ul class="nav nav-tabs my-color" id="myTab-${course.id}" role="tablist">
+    //                 <li class="nav-item" role="presentation">
+    //                     <button class="nav-link active" id="learn-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#learn-${course.id}" type="button" role="tab" aria-controls="learn-${course.id}" aria-selected="true">What you'll learn</button>
+    //                 </li>
+    //                 <li class="nav-item" role="presentation">
+    //                     <button class="nav-link" id="content-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#content-${course.id}" type="button" role="tab" aria-controls="content-${course.id}" aria-selected="false">Course content</button>
+    //                 </li>
+                 
+    //                 <li class="nav-item" role="presentation">
+    //                     <button class="nav-link" id="lectures-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#lectures-${course.id}" type="button" role="tab" aria-controls="lectures-${course.id}" aria-selected="false">Lectures</button>
+    //                 </li>
+    //                 <li class="nav-item" role="presentation">
+    //                     <button class="nav-link" id="add-lecture-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#add-lecture-${course.id}" type="button" role="tab" aria-controls="add-lecture-${course.id}" aria-selected="false">Add Lecture</button>
+    //                 </li>
+    //             </ul>
+    //             <div class="tab-content" id="myTabContent-${course.id}">
+    //                 <div class="tab-pane fade show active" id="learn-${course.id}" role="tabpanel" aria-labelledby="learn-tab-${course.id}">
+    //                     <div class="card mt-3">
+    //                         <div class="card-body">
+    //                             <p class="card-text my-color">${course.course_outcome}</p>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //                 <div class="tab-pane fade" id="content-${course.id}" role="tabpanel" aria-labelledby="content-tab-${course.id}">
+    //                     <div class="card mt-3">
+    //                         <div class="card-body">
+    //                             <p class="card-text my-color ">${course.course_contain}</p>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+
+                  
+    //                 <div class="tab-pane fade" id="lectures-${course.id}" role="tabpanel" aria-labelledby="lectures-tab-${course.id}">
+    //                     <div class="card mt-3">
+    //                         <div class="card-body" id="lectures-content-${course.id}">
+    //                             <!-- Lectures will be appended here -->
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //                 <div class="tab-pane fade" id="add-lecture-${course.id}" role="tabpanel" aria-labelledby="add-lecture-tab-${course.id}">
+    //                     <div class="card mt-3">
+    //                         <div class="card-body">
+    //                             <a href="/lecture_up?${course.id}" class="btn btn-primary">Add Lecture</a>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     `);
+    //     fetchLectures(course.id);
+    // }
+
+
     function showCourse(course) {
         $("#course").append(`
             <div class="col-12 col-md-12 mx-auto my-3">
@@ -52,12 +124,14 @@ $(document).ready(function () {
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="content-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#content-${course.id}" type="button" role="tab" aria-controls="content-${course.id}" aria-selected="false">Course content</button>
                     </li>
-                 
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="lectures-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#lectures-${course.id}" type="button" role="tab" aria-controls="lectures-${course.id}" aria-selected="false">Lectures</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="add-lecture-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#add-lecture-${course.id}" type="button" role="tab" aria-controls="add-lecture-${course.id}" aria-selected="false">Add Lecture</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="enrolled-users-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#enrolled-users-${course.id}" type="button" role="tab" aria-controls="enrolled-users-${course.id}" aria-selected="false">Enrolled Users</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent-${course.id}">
@@ -71,12 +145,10 @@ $(document).ready(function () {
                     <div class="tab-pane fade" id="content-${course.id}" role="tabpanel" aria-labelledby="content-tab-${course.id}">
                         <div class="card mt-3">
                             <div class="card-body">
-                                <p class="card-text my-color ">${course.course_contain}</p>
+                                <p class="card-text my-color">${course.course_contain}</p>
                             </div>
                         </div>
                     </div>
-
-                  
                     <div class="tab-pane fade" id="lectures-${course.id}" role="tabpanel" aria-labelledby="lectures-tab-${course.id}">
                         <div class="card mt-3">
                             <div class="card-body" id="lectures-content-${course.id}">
@@ -91,11 +163,20 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="enrolled-users-${course.id}" role="tabpanel" aria-labelledby="enrolled-users-tab-${course.id}">
+                        <div class="card mt-3">
+                            <div class="card-body" id="enrolled-users-content-${course.id}">
+                                <!-- Enrolled users will be appended here -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `);
         fetchLectures(course.id);
+        fetchEnrolledUsers(course.id);
     }
+    
 
     function fetchLectures(courseId) {
         $.ajax({
@@ -149,4 +230,100 @@ $(document).ready(function () {
 
      `);
     }
+}
+
+
+);
+function fetchEnrolledUsers(courseId) {
+    $.ajax({
+        type: "GET",
+        url: apiLink + "/api/enrollment/get",
+        headers: {
+            Authorization: "Bearer " + getCookie("token"),
+        },
+        data: {
+            course_id: courseId,
+        },
+        success: function (res) {
+            $("#enrolled-users-content-" + courseId).html(""); // Clear previous content
+            res.forEach(function (user) {
+                showEnrolledUser(courseId, user);
+            });
+        },
+        error: function (err) {
+            console.error('Failed to fetch enrolled users:', err);
+        },
+    });
+}
+
+// function showEnrolledUser(courseId, user) {
+//     $("#enrolled-users-content-" + courseId).append(`
+//         <div class="col-12">
+//             <div class="card mb-3">
+//                 <div class="row g-0">
+//                     <div class="col-md-4">
+//                         <img src="${apiLink + user.profile_picture}" class="img-fluid rounded-start" alt="User Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">
+//                     </div>
+//                     <div class="col-md-8">
+//                         <div class="card-body">
+//                             <h5 class="card-title">${user.username}</h5>
+//                             <p class="card-text">${user.email}</p>
+//                             <button class="btn btn-danger ban-user" data-course-id="${courseId}" data-user-id="${user.id}">Ban User</button>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     `);
+// }
+
+function showEnrolledUser(courseId, user) {
+    $("#enrolled-users-content-" + courseId).append(`
+        <div class="col-12 mb-3">
+            <div class="card">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-3">
+                        <img src="${apiLink + user.profile_picture}" class="img-fluid rounded-circle" alt="User Profile Picture" style="width: 80px; height: 60px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title">${user.username}</h5>
+                            <p class="card-text">${user.mobile}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-danger ban-user" data-course-id="${courseId}" data-user-id="${user.id}">Ban User</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `);
+}
+
+
+
+
+
+$(document).on('click', '.ban-user', function () {
+    const courseId = $(this).data('course-id');
+    const userId = $(this).data('user-id');
+
+    $.ajax({
+        type: "DELETE",
+        url: apiLink + "/api/enrollment/delete",
+        headers: {
+            Authorization: "Bearer " + getCookie("token"),
+        },
+        data: {
+            course_id: courseId,
+            user_id: userId,
+        },
+        success: function (res) {
+            alert('User has been banned successfully.');
+            fetchEnrolledUsers(courseId); // Refresh the user list
+        },
+        error: function (err) {
+            console.error('Failed to ban user:', err);
+        },
+    });
 });
