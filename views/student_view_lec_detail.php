@@ -10,7 +10,7 @@
   <link href="../style/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../style/style.css" />
-  <style>
+  <!-- <style>
     .course-list-item {
       display: flex;
       align-items: center;
@@ -49,12 +49,15 @@
     .video-card {
       background-color: #000;
       color: #fff;
-      border-radius: 8px;
+      border-radius: 15px;
       padding: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     
     }
     .video-thumbnail {
+ 
       margin-bottom: 20px;
+    
     }
     .video-title {
       font-size: 2rem;
@@ -71,6 +74,77 @@
     .btn-outline-secondary:hover {
       background-color: #fff;
       color: #000;
+    }
+  </style> -->
+
+  <style>
+    .course-list-item {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+    .course-thumbnail {
+      width: 70%;
+      height: 70%;
+      object-fit: cover;
+    }
+    .course-details {
+      flex-grow: 2;
+      padding: 0 20px;
+    }
+    .course-title {
+      margin: 0;
+      font-size: 1.8rem; /* Increased size */
+      font-weight: bold;
+      color: #343a40;
+    }
+    .course-outcome {
+      margin: 10px 0;
+      font-family: cursive;
+      font-size: 1.1rem; /* Increased size */
+      color: #6c757d;
+    }
+    .course-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Adjust the gap between buttons */
+    }
+    .course-actions button {
+      width: 120px;
+    }
+    .modal-content {
+      font-size: 1rem; /* Adjust modal font size */
+    }
+    .video-card {
+      background-color: #000;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .video-thumbnail video {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .video-details {
+      padding: 10px 0;
+    }
+    .video-title {
+      color: #007bff;
+      font-weight: bold;
+    }
+    .video-description {
+      font-family: cursive;
+      color: #343a40;
+    }
+    .btn-outline-secondary {
+      color: #343a40;
+      border-color: #343a40;
+    }
+    .btn-outline-secondary:hover {
+      background-color: #343a40;
+      color: #fff;
     }
   </style>
 </head>
@@ -130,7 +204,7 @@
         function showCourseLecture(courseLecture) {
             $("#course").append(`
                 <div class="col-12">
-                    <div class="video-card ms-5">
+                    <div class="video-card md-5">
                         
                         <div class="video-thumbnail">
                             <center><video src="${apiLink + courseLecture.video}" controls style="width: 100%;"></video></center>
@@ -140,6 +214,7 @@
                             <h4 class="video-description my-color" style="font-family:cursive;">Lecture Description: ${courseLecture.lecture_description}</h4>
                             <a href="${apiLink + courseLecture.material}" target="_blank" class="btn btn-sm btn-outline-secondary">Download Material</a>
                         </div>
+                        
                     </div>
                 </div>
             `);

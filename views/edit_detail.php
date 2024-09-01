@@ -23,8 +23,8 @@
         color: #333;
       }
       .edit-course-form {
-        max-width: 600px;
-        margin: 50px auto;
+        max-width: 900px;
+        margin: 20px auto;
         background-color: #ffffff;
         padding: 30px;
         border-radius: 10px;
@@ -55,6 +55,7 @@
         font-size: 16px;
         color: #333;
         background-color: #f9f9f9;
+        box-sizing: border-box;
       }
       .form-group input:focus,
       .form-group textarea:focus {
@@ -64,7 +65,7 @@
       }
       .form-group img {
         max-width: 100%;
-        height: auto;
+        height: 200px;
         margin-top: 10px;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -81,10 +82,31 @@
         font-weight: 500;
         cursor: pointer;
         transition: background-color 0.3s;
-        margin-left: 180px;
+        margin-left: 250px;
       }
       .form-group button:hover {
         background-color: #0056b3;
+      }
+      .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -10px;
+      }
+      .form-col {
+        flex: 1;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .form-col.full-width {
+        flex: 1 1 100%;
+      }
+      .form-row > .form-col {
+        margin: 0;
+      }
+      @media (max-width: 768px) {
+        .form-col {
+          flex: 1 1 100%;
+        }
       }
     </style>
   </head>
@@ -111,24 +133,34 @@
               <label for="title">Course Title</label>
               <input type="text" id="title" name="title" required>
             </div>
-            <div class="form-group">
-              <label for="course_outcome">Course Outcome</label>
-              <textarea id="course_outcome" name="course_outcome" rows="4" required></textarea>
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="course_outcome">Course Outcome</label>
+                  <textarea id="course_outcome" name="course_outcome" rows="4" required></textarea>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="course_contain">Course Contain</label>
+                  <textarea id="course_contain" name="course_contain" rows="4" required></textarea>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="course_contain">Course Contain</label>
-              <textarea id="course_contain" name="course_contain" rows="4" required></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="course_contain">Course Fee</label>
-              <input type="text" id="course_fee" name="course_fee" required>
-            </div>
-
-            <div class="form-group">
-              <label for="course_thumbnil">Course Thumbnail</label>
-              <input type="file" id="course_thumbnil" name="course_thumbnil" accept="image/*">
-              <img id="thumbnail_preview" src="" alt="Current Thumbnail">
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="course_fee">Course Fee</label>
+                  <input type="number" id="course_fee" name="course_fee" required>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="course_thumbnil">Course Thumbnail</label>
+                  <input type="file" id="course_thumbnil" name="course_thumbnil" accept="image/*">
+                  <!-- <img id="thumbnail_preview" src="" alt="Current Thumbnail"> -->
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <button type="submit">Save</button>
@@ -145,8 +177,6 @@
     <script>
       $(document).ready(function () {
         on_page_load([]);
-
-       
       });
     </script>
   </body>
