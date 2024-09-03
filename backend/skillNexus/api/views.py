@@ -766,6 +766,10 @@ def getCourseVideo(req):
 #         return Response(course.data, status=status.HTTP_200_OK)
 #     except:
 #         return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
 @api_view(['GET'])
 def getEnrolledCourseVideo(req):
     user = getUser(req)
@@ -842,6 +846,138 @@ def getSingleCourseDetail(req):
         return Response(course.data, status=status.HTTP_200_OK)
     except:
         return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+
+
+@ api_view(['GET'])
+def allSkill(req):
+    try:
+        obj = Skill.objects.all()
+        skills = SkillSeriallizer(obj, many=True)
+        return Response(skills.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'message': 'No skill found.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@ api_view(['GET'])
+def allSkilladd(req):
+    categories = [
+        "Frontend Development",
+        "Backend Development",
+        "Full-Stack Development",
+        "API Development",
+        "Native App Development",
+        "Hybrid App Development",
+        "Data Analysis",
+        "Machine Learning",
+        "Big Data Analysis",
+        "Ethical Hacking",
+        "Network Security",
+        "Security Analysis",
+        "Cloud Computing",
+        "Version Control",
+        "Scrum",
+        "Kanban",
+        "Lean",
+        "Project Management",
+        "Continuous Integration/Continuous Deployment (CI/CD)",
+        "Infrastructure as Code (IaC)",
+        "Configuration Management",
+        "Python",
+        "JavaScript",
+        "Java",
+        "C#",
+        "C++",
+        "PHP",
+        "Ruby",
+        "Swift",
+        "Kotlin",
+        "Django",
+        "React",
+        "Angular",
+        "Vue.js",
+        "Node.js",
+        "Unity",
+        "TensorFlow",
+        "PyTorch",
+        "Print Design",
+        "Web Design",
+        "Branding & Logo Design",
+        "UX/UI Design Principles",
+        "Prototyping",
+        "User Research",
+        "Linear Editing",
+        "Motion Graphics",
+        "3D Modeling",
+        "3D Animation",
+        "Game Design",
+        "Game Programming",
+        "Game Art",
+        "Music Production",
+        "Content Writing",
+        "Copywriting",
+        "Editing & Proofreading",
+        "Coding Bootcamps",
+        "Coursera",
+        "Udemy",
+        "edX",
+        "Pluralsight",
+        "Codecademy",
+        "LinkedIn Learning",
+        "Webinars & Workshops",
+        "W3Schools",
+        "MDN Web Docs",
+        "Stack Overflow",
+        "Tutorialspoint",
+        "GeeksforGeeks"
+    ]
+    for x in categories:
+        skills = SkillSeriallizer(data={'name': x})
+        if skills.is_valid():
+            skills.save()
+    return Response(skills.data, status=status.HTTP_200_OK)
+    return Response({'message': 'No skill found.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@ api_view(['GET'])
+def getSkill(req):
+    user = getUser(req)
+    try:
+        objs = User_skill.objects.filter(user=user['id'])
+        skills = User_skillSerializer(objs, many=True)
+        return Response(skills.data, status=status.HTTP_200_OK)
+    except:
+        return Response({'msg': 'No skill Found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@ api_view(['POST'])
+def addSkill(req):
+    user = getUser(req)
+    data = req.data.dict()
+    data['user'] = user['id']
+    serializer = User_skillSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@ api_view(['DELETE'])
+def delSkill(req):
+    user = getUser(req)
+    skill_id = req.data['skill_id']
+    try:
+        skill = User_skill.objects.get(skill=skill_id, user=user['id'])
+        skill.delete()
+        return Response({"message": "Skill has been deleted"}, status=status.HTTP_200_OK)
+    except User_skill.DoesNotExist:
+        return Response({"error": "Skill record not found or does not belong to the user"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 @ api_view(['GET'])
@@ -1113,3 +1249,40 @@ def editStatus(req):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+@api_view(['GET'])
+def get_enrolled_users(request):
+    course_id = request.GET.get('course_id')
+    if not course_id:
+        return Response({"error": "Course ID is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        course = Course.objects.get(id=course_id)
+        enrolled_users = Enrollment.objects.filter(course=course)
+        users = [enrollment.user for enrollment in enrolled_users]
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Course.DoesNotExist:
+        return Response({"error": "Course not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+
+
+
+@api_view(['DELETE'])
+def ban_user_from_course(request):
+    course_id = request.data.get('course_id')
+    user_id = request.data.get('user_id')
+
+    if not course_id or not user_id:
+        return Response({"error": "Course ID and User ID are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        enrollment = Enrollment.objects.get(course_id=course_id, user_id=user_id)
+        enrollment.delete()
+        return Response({"message": "User has been banned successfully."}, status=status.HTTP_204_NO_CONTENT)
+    except Enrollment.DoesNotExist:
+        return Response({"error": "Enrollment not found"}, status=status.HTTP_404_NOT_FOUND)

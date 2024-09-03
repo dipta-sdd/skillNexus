@@ -60,12 +60,12 @@
 
                   <div class="mb-3">
                     <label for="description" class="form-label">What You Will Learn</label>
-                    <textarea class="form-control" id="wdescription" name="course_outcome" rows="4" required></textarea>
+                    <textarea class="form-control" id="wdescription" name="course_outcome" rows="3" required></textarea>
                   </div>
 
                   <div class="mb-3">
                     <label for="description" class="form-label">This course includes</label>
-                    <textarea class="form-control" id="tdescription" name="course_contain" rows="4" required></textarea>
+                    <textarea class="form-control" id="tdescription" name="course_contain" rows="3" required></textarea>
                   </div>
 
                   <div class="mb-3">

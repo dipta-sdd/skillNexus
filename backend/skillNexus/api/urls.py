@@ -62,8 +62,8 @@ urlpatterns = [
          name='course_list_single'),
     path('course_enroll/add', views.course_enroll, name='course_enroll'),
     path('course_enroll/check', views.check_enrollment),
-    path('enrolled_course_video/get', views.getEnrolledCourseVideo)
-
-
-
+    path('enrolled_course_video/get', views.getEnrolledCourseVideo),
+    path('enrollment/get', views.get_enrolled_users, name='get_enrolled_users'),
+    path('enrollment/delete', views.ban_user_from_course, name='ban_user_from_course')
+    
 ]

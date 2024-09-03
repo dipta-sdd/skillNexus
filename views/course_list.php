@@ -21,6 +21,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../style/style.css" />
+    
     <style>
     .course-thumbnail {
       width: 100%;
@@ -99,7 +100,7 @@
 
           </div>
           <!-- main body-->
-          <div class="row text-light mybg my-row"  id="course"></div>
+          <div class="row text-light mybg my-row"  id="course" style="font-family:cursive"></div>
           <!-- main body-->
           <!-- main body-->
           <!-- main body-->

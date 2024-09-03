@@ -50,7 +50,7 @@
       font-size: 1rem; /* Adjust modal font size */
     }
     .video-card {
-      background-color: #f8f9fa;
+      background-color: #000;
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 20px;
@@ -135,7 +135,7 @@
       function showCourseLecture(courseLecture) {
         $("#course").append(`
           <div class="col-12">
-            <div class="video-card ms-5">
+            <div class="video-card md-5">
               
               <div class="video-thumbnail">
                 <center><video src="${apiLink + courseLecture.video}" controls></video></center>
@@ -144,8 +144,9 @@
                 <h4 class="video-title">Lecture title: ${courseLecture.title}</h4>
                 <h4 class="video-description">Lecture Description: ${courseLecture.lecture_description}</h4>
                 <a href="${apiLink + courseLecture.material}" target="_blank" class="btn btn-sm btn-outline-secondary">Download Material</a>
-                <a href="#" class="btn btn-danger" style="float:right;">Delete</a>
-                <a href="/edit_video?${courseLecture.id}" class="btn btn-primary" style="float:right; margin-left:40px">Edit Lecture</a> &nbsp
+               <a href="#" class="btn btn-danger" style="float:right; margin-left:10px;">Delete</a>
+<a href="/edit_video?${courseLecture.id}" class="btn btn-primary" style="float:right;">Edit Lecture</a>
+
               </div>
             </div>
           </div>

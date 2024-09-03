@@ -120,6 +120,9 @@ $(document).ready(function () {
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="lectures-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#lectures-${course.id}" type="button" role="tab" aria-controls="lectures-${course.id}" aria-selected="false">Lectures</button>
                     </li>
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="discussion-tab-${course.id}" data-bs-toggle="tab" data-bs-target="#discussion-${course.id}" type="button" role="tab" aria-controls="lectures-${course.id}" aria-selected="false">Discussion</button>
+                    </li>
                 </ul>
                 <div class="tab-content" id="myTabContent-${course.id}">
                     <div class="tab-pane fade show active" id="learn-${course.id}" role="tabpanel" aria-labelledby="learn-tab-${course.id}">
@@ -158,6 +161,8 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </div>
+
+                    
                 </div>
             </div>
             </div>
@@ -291,7 +296,6 @@ $(document).ready(function () {
     // Fetch course details on page load
     fetchCourseDetails();
 });
-
 
 
 
