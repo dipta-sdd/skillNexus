@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SkilNexus</title>
-  <link href="../style/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="../style/style.css" />
-  <!-- <style>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SkilNexus</title>
+    <link href="../style/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../style/style.css" />
+    <!-- <style>
     .course-list-item {
       display: flex;
       align-items: center;
@@ -77,102 +80,124 @@
     }
   </style> -->
 
-  <style>
+    <style>
     .course-list-item {
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-      padding: 15px 0;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding: 15px 0;
     }
+
     .course-thumbnail {
-      width: 70%;
-      height: 70%;
-      object-fit: cover;
+        width: 70%;
+        height: 70%;
+        object-fit: cover;
     }
+
     .course-details {
-      flex-grow: 2;
-      padding: 0 20px;
+        flex-grow: 2;
+        padding: 0 20px;
     }
+
     .course-title {
-      margin: 0;
-      font-size: 1.8rem; /* Increased size */
-      font-weight: bold;
-      color: #343a40;
+        margin: 0;
+        font-size: 1.0rem;
+        /* Increased size */
+        font-weight: bold;
+        color: #343a40;
     }
+
     .course-outcome {
-      margin: 10px 0;
-      font-family: cursive;
-      font-size: 1.1rem; /* Increased size */
-      color: #6c757d;
+        margin: 10px 0;
+        font-family: cursive;
+        font-size: 1.1rem;
+        /* Increased size */
+        color: #6c757d;
     }
+
     .course-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px; /* Adjust the gap between buttons */
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        /* Adjust the gap between buttons */
     }
+
     .course-actions button {
-      width: 120px;
+        width: 120px;
     }
+
     .modal-content {
-      font-size: 1rem; /* Adjust modal font size */
+        font-size: 1rem;
+        /* Adjust modal font size */
     }
+
     .video-card {
-      background-color: #000;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #000;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
     .video-thumbnail video {
-      width: 100%;
-      border-radius: 10px;
+        width: 100%;
+        border-radius: 10px;
     }
+
     .video-details {
-      padding: 10px 0;
+        padding: 10px 0;
     }
+
     .video-title {
-      color: #007bff;
-      font-weight: bold;
+        margin-top: 20px;
+        color: #007bff;
+        font-weight: bold;
     }
+
     .video-description {
-      font-family: cursive;
-      color: #343a40;
+        margin-top: 20px;
+        font-family: cursive;
+        color: #343a40;
     }
+
     .btn-outline-secondary {
-      color: #343a40;
-      border-color: #343a40;
+        margin-top: 20px;
+        color: #343a40;
+        border-color: #343a40;
     }
+
     .btn-outline-secondary:hover {
-      background-color: #343a40;
-      color: #fff;
+        background-color: #343a40;
+        color: #fff;
     }
-  </style>
+    </style>
 </head>
+
 <body>
-  <div aria-live="polite" aria-atomic="true" class="position-relative">
-    <div class="toast-container top-0 end-0 p-3">
-      <!-- Then put toasts within -->
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+        <div class="toast-container top-0 end-0 p-3">
+            <!-- Then put toasts within -->
+        </div>
     </div>
-  </div>
-  <?php include 'sidebar.php' ?>
-  <div class="my-round" id="body">
-    <nav aria-label="breadcrumb" class="mybg-t breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item" aria-current="page">Showing Lecture Details</li>
-      </ol>
-    </nav>
-    <!-- main body-->
-    <div class="row my-color mybg my-row" id="course" style="font-family: cursive">
-      <!-- Edit Modal -->
+    <?php include 'sidebar.php' ?>
+    <div class="my-round" id="body">
+        <nav aria-label="breadcrumb" class="mybg-t breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page">Showing Lecture Details</li>
+            </ol>
+        </nav>
+        <!-- main body-->
+        <div class="row my-color mybg my-row" id="course" style="font-family: cursive">
+            <!-- Edit Modal -->
+        </div>
+        <!-- main body-->
     </div>
-    <!-- main body-->
-  </div>
-  <script src="../script/bootstrap.bundle.min.js"></script>
-  <script src="../script/jquery-3.7.1.min.js"></script>
-  <script src="../script/script.js"></script>
-  <script>
-    $(document).ready(function () {
+    <script src="../script/bootstrap.bundle.min.js"></script>
+    <script src="../script/jquery-3.7.1.min.js"></script>
+    <script src="../script/script.js"></script>
+    <script>
+    $(document).ready(function() {
         on_page_load([]);
         const url = window.location.href;
         const params = url.split('?')[1].split('&');
@@ -189,13 +214,13 @@
                 course_id: courseId,
                 lecture_id: lectureId,
             },
-            success: function (res) {
+            success: function(res) {
                 $("#course").html("");
-                res.forEach(function (courseLecture) {
+                res.forEach(function(courseLecture) {
                     showCourseLecture(courseLecture);
                 });
             },
-            error: function (err) {
+            error: function(err) {
                 console.error('Failed to fetch course lectures:', err);
             },
         });
@@ -220,6 +245,7 @@
             `);
         }
     });
-  </script>
+    </script>
 </body>
+
 </html>

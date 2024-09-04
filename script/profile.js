@@ -71,7 +71,7 @@ $(document).ready(function () {
     if (!data.error) {
       $.ajax({
         type: "POST",
-        url: "api/employer/company/add",
+        url: apiLink + "/api/employer/company/add",
         data: data,
         headers: {
           Authorization: "Bearer " + getCookie("token"),
@@ -115,7 +115,7 @@ $(document).ready(function () {
     if (!data.error) {
       $.ajax({
         type: "POST",
-        url: "api/university/add",
+        url: apiLink + "/api/university/add",
         data: data,
         headers: {
           Authorization: "Bearer " + getCookie("token"),

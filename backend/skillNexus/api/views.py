@@ -768,8 +768,6 @@ def getCourseVideo(req):
 #         return Response({'msg': 'No Lecture Found'}, status=status.HTTP_204_NO_CONTENT)
 
 
-
-
 @api_view(['GET'])
 def getEnrolledCourseVideo(req):
     user = getUser(req)
@@ -846,10 +844,6 @@ def getSingleCourseDetail(req):
         return Response(course.data, status=status.HTTP_200_OK)
     except:
         return Response({'msg': 'No Course Found'}, status=status.HTTP_204_NO_CONTENT)
-
-
-
-
 
 
 @ api_view(['GET'])
@@ -977,7 +971,6 @@ def delSkill(req):
         return Response({"error": "Skill record not found or does not belong to the user"}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 
 @ api_view(['GET'])
@@ -1200,7 +1193,7 @@ def course_enroll(request):
     # Check if the user is already enrolled in the course
     if Enrollment.objects.filter(course=course, user=user).exists():
         return Response({'detail': 'Already enrolled in this course.'}, status=status.HTTP_400_BAD_REQUEST)
-
+    print('++++++++++++++++++++++++++++++++++++++++++++')
     # Enroll the user
     enrollment = Enrollment.objects.create(course=course, user=user)
     return Response({'detail': 'Enrolled successfully.'}, status=status.HTTP_200_OK)
@@ -1251,9 +1244,6 @@ def editStatus(req):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
-
 @api_view(['GET'])
 def get_enrolled_users(request):
     course_id = request.GET.get('course_id')
@@ -1268,8 +1258,6 @@ def get_enrolled_users(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     except Course.DoesNotExist:
         return Response({"error": "Course not found"}, status=status.HTTP_404_NOT_FOUND)
-    
-
 
 
 @api_view(['DELETE'])
@@ -1281,7 +1269,8 @@ def ban_user_from_course(request):
         return Response({"error": "Course ID and User ID are required"}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
-        enrollment = Enrollment.objects.get(course_id=course_id, user_id=user_id)
+        enrollment = Enrollment.objects.get(
+            course_id=course_id, user_id=user_id)
         enrollment.delete()
         return Response({"message": "User has been banned successfully."}, status=status.HTTP_204_NO_CONTENT)
     except Enrollment.DoesNotExist:

@@ -1,4 +1,3 @@
-
 <?php
 
 $request =  trim($_SERVER['REQUEST_URI'], '/');
@@ -43,6 +42,9 @@ switch ($requests[0]) {
         break;
     case 'users' :
         require __DIR__ . '/views/users.php';
+        break;
+    case 'suspended' :
+        require __DIR__ . '/views/sus.html';
         break;
     // -------------------------------------------------------------------------------
 
